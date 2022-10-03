@@ -1,3 +1,5 @@
+# こちらは私の作品ではなく勉強サイトの資料になります｡
+
 # 環境構築
 [スライド形式マニュアル](https://docs.google.com/presentation/d/16g_T-qrpcZx8OKeWB6QUUZFHzkfAjCp3EEJg74mE26Q/edit?usp=sharing)
 
