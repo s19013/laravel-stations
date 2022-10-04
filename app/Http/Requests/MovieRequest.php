@@ -14,9 +14,8 @@ class MovieRequest extends FormRequest
     public function authorize()
     {
         // 一部urlでのみ有効
-        dd($this->path());
         $validityList = [
-            '/admin/movie/store'
+            'admin/movies/store',
         ];
 
         if (in_array($this->path(), $validityList )) { return true; }
@@ -44,7 +43,7 @@ class MovieRequest extends FormRequest
         return [
             'title.required'       => '入力してください',
             'image_url.required'   => '入力してください',
-            'image_url.url'        => 'urlを入力してください',
+            'image_url.url'      => 'urlを入力してください',
             'description.required' => '入力してください',
             'is_showing.required'  => '入力してください',
             'published_year.required' => '入力してください',
