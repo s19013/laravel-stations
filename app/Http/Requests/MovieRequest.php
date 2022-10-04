@@ -38,12 +38,12 @@ class MovieRequest extends FormRequest
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
             'title.required'       => '入力してください',
             'image_url.required'   => '入力してください',
-            'image_url.url'      => 'urlを入力してください',
+            'image_url.url'        => 'urlを入力してください',
             'description.required' => '入力してください',
             'is_showing.required'  => '入力してください',
             'published_year.required' => '入力してください',
