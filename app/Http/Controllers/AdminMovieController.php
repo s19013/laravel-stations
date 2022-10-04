@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MovieRequest;
 
 use App\Models\Movie;
 
@@ -16,9 +17,8 @@ class AdminMovieController extends Controller
         return view('admin.movie.index', ['movieList' => $movieList]);
     }
 
-    public function store(Request $request)
+    public function store(MovieRequest $request)
     {
-
         // タイトルにかぶりがないかチェック
         if (Movie::isAllreadyExists($request->title)) {
             return redirect(route('movie.create'),302)->with(
