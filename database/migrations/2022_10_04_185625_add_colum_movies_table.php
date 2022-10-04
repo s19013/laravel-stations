@@ -13,7 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('movies', function (Blueprint $table) {
+            $table->integer('published_year')->comment('公開年');
+            $table->tinyInteger('is_showing')->default(false)->comment('上映中かどうか');
+            $table->text('description')->comment('概要');
+        });
     }
 
     /**
@@ -23,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('movies', function (Blueprint $table) {
+            $table->dropColumn('summary');  //カラムの削除
+        });
     }
 };
