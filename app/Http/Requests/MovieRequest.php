@@ -30,7 +30,7 @@ class MovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'       => 'required',
+            'title'       => 'required|unique:movies',
             'image_url'   => 'required|url',
             'description' => 'required',
             'is_showing'  => 'required',
@@ -42,6 +42,7 @@ class MovieRequest extends FormRequest
     {
         return [
             'title.required'       => '入力してください',
+            'title.unique'         => 'そのタイトルの映画はすでに登録されています',
             'image_url.required'   => '入力してください',
             'image_url.url'        => 'urlを入力してください',
             'description.required' => '入力してください',
