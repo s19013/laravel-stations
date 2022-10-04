@@ -19,13 +19,6 @@ class AdminMovieController extends Controller
 
     public function store(MovieRequest $request)
     {
-        // タイトルにかぶりがないかチェック
-        if (Movie::isAllreadyExists($request->title)) {
-            return redirect(route('movie.create'),302)->with(
-                ['allReadyExists' => 'そのタイトルはすでに登録されています']
-            )->withInput();
-        }
-
         // 登録
         Movie::storeMovie(
             title         :$request->title,

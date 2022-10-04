@@ -17,13 +17,6 @@ class Movie extends Model
         'updated_at',
     ];
 
-    // タイトルにかぶりがないかチェック
-    public static function  isAllreadyExists($title)
-    {
-        return Movie::where('title','=',$title)
-        ->exists();//existsでダブっていればtrue
-    }
-
     // 登録
     public static function storeMovie($title,$image_url,$description,$is_showing,$published_year)
     {
