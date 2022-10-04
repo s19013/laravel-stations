@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\AdminMovieController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +28,9 @@ Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 Route::get('/movies', [MovieController::class, 'index']);
 
+Route::prefix('/admin/movies')->group(function () {
+    Route::get('/' , [AdminMovieController::class, 'index']);
+    Route::get('/create'  , [AdminMovieController::class,'transitionToCreate'])->name('movie.create');
+    Route::post('/store'   , [AdminMovieController::class,'store'])->name('movie.store');
+    Route::post('/search' , [AdminMovieController::class,'']);
+});
