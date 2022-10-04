@@ -7,9 +7,6 @@
     <title>Practice</title>
 </head>
 <body>
-    @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-    @endforeach
     <form action="{{route('movie.store')}}" method="post">
         @csrf
         <p>タイトル</p>
@@ -21,16 +18,17 @@
         @endif
         <input name='title' type="text" value="{{old('title')}}" required>
 
+        <p>画像のURL</p>
         @if ($errors->has('image_url'))
             <p>{{$errors->first('image_url')}}</p>
         @endif
-        <p>画像のURL</p>
+
         <input name='image_url' type="text" value="{{old('image_url')}}" required>
 
+        <p>公開年</p>
         @if ($errors->has('published_year'))
             <p>{{$errors->first('published_year')}}</p>
         @endif
-        <p>公開年</p>
         <select name="published_year" required>
 
             <option value=2000 selected>2000</option>
@@ -43,10 +41,10 @@
         <br>
         <input type="checkbox" name="is_showing"  value='true'>上映中
 
+        <p>概要</p>
         @if ($errors->has('description'))
             <p>{{$errors->first('description')}}</p>
         @endif
-        <p>概要</p>
         <textarea name="description" id="" cols="30" rows="10" required>{{old('description')}}</textarea>
 
         <input type="submit" value="送信">
