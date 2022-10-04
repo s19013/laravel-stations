@@ -10,26 +10,29 @@
     <form action="{{route('movie.store')}}" method="post">
         @csrf
         <p>タイトル</p>
-        @if (session('allReadyExists'))
-            <p>{{ session('allReadyExists') }}</p>
-        @endif
         @if ($errors->has('title'))
-            <p>{{$errors->first('title')}}</p>
+            @foreach ($errors->get('title') as $error)
+                <p>{{$error}}</p>
+            @endforeach
         @endif
-        <input name='title' type="text" value="{{old('title')}}" required>
+        <input name='title' type="text" value="{{old('title')}}" required >
 
         <p>画像のURL</p>
         @if ($errors->has('image_url'))
-            <p>{{$errors->first('image_url')}}</p>
+            @foreach ($errors->get('image_url') as $error)
+                <p>{{$error}}</p>
+            @endforeach
         @endif
 
         <input name='image_url' type="text" value="{{old('image_url')}}" required>
 
         <p>公開年</p>
         @if ($errors->has('published_year'))
-            <p>{{$errors->first('published_year')}}</p>
+            @foreach ($errors->get('published_year') as $error)
+                <p>{{$error}}</p>
+            @endforeach
         @endif
-        <select name="published_year" required>
+        <select name="published_year" >
 
             <option value=2000 selected>2000</option>
 
@@ -43,7 +46,9 @@
 
         <p>概要</p>
         @if ($errors->has('description'))
-            <p>{{$errors->first('description')}}</p>
+            @foreach ($errors->get('description') as $error)
+                <p>{{$error}}</p>
+            @endforeach
         @endif
         <textarea name="description" id="" cols="30" rows="10" required>{{old('description')}}</textarea>
 
