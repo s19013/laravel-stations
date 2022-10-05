@@ -13,12 +13,14 @@ class MovieRequest extends FormRequest
      */
     public function authorize()
     {
-        // 一部urlでのみ有効
+        // 通信メソッドで制限
+        // 今回の仕様ではURLで制限をかけるのは難しいと判断
         $validityList = [
-            'admin/movies/store',
+            'PATCH',
+            'POST'
         ];
 
-        if (in_array($this->path(), $validityList )) { return true; }
+        if (in_array($this->method(), $validityList )) { return true; }
         return false;
     }
 
@@ -29,8 +31,10 @@ class MovieRequest extends FormRequest
      */
     public function rules()
     {
+
+        // 2バイトトラップの処理とかあるけど今回はそういうの無視
         return [
-            'title'       => 'required|unique:movies',
+            'title'       => 'required|unique:movies|max:220',
             'image_url'   => 'required|url',
             'description' => 'required',
             'is_showing'  => 'required',
@@ -43,6 +47,7 @@ class MovieRequest extends FormRequest
         return [
             'title.required'       => '入力してください',
             'title.unique'         => 'そのタイトルの映画はすでに登録されています',
+            'title.max'            => '120文字いないで入力',
             'image_url.required'   => '入力してください',
             'image_url.url'        => 'urlを入力してください',
             'description.required' => '入力してください',
