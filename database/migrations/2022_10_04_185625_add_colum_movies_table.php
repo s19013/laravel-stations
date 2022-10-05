@@ -28,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->dropColumn('summary');  //カラムの削除
+            $table->dropColumn('published_year');
+            $table->dropColumn('is_showing');
+            $table->dropColumn('description');
         });
     }
 };
