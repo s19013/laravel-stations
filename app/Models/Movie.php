@@ -18,17 +18,41 @@ class Movie extends Model
     ];
 
     // 登録
-    public static function storeMovie($title,$image_url,$description,$is_showing,$published_year)
+    public static function storeMovie($request)
     {
-        if (empty($is_showing)) {$is_showing = false;}
-        DB::transaction(function () use($title,$image_url,$description,$is_showing,$published_year){
+        if (empty($request->is_showing)) {$request->is_showing = false;}
+        DB::transaction(function () use($request){
             Movie::create([
-                'title'     => $title,
-                'image_url' => $image_url,
-                'description' => $description,
-                'is_showing'  => $is_showing,
-                'published_year' => $published_year,
+                'title'       => $request->title,
+                'image_url'   => $request->image_url,
+                'description' => $request->description,
+                'is_showing'  => $request->is_showing,
+                'published_year' => $request->published_year,
             ]);
         });
     }
+
+    public static function updateMovie($request)
+    {
+        if (empty($request->is_showing)) {$request->is_showing = false;}
+        DB::transaction(function () use($request){
+            Movie::where('id','=',$request->id)
+            ->update([
+                'title'       => $request->title,
+                'image_url'   => $request->image_url,
+                'description' => $request->description,
+                'is_showing'  => $request->is_showing,
+                'published_year' => $request->published_year,
+            ]);
+        });
+    }
+
+    // 単体データ取得
+    public static function getMovieData($id)
+    {
+        // 1つだけとってくるからfirstで十分
+        return Movie::select('*')->where('id','=',$id)->first();
+    }
+
+
 }
