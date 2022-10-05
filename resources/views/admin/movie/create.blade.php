@@ -7,7 +7,7 @@
     <title>Practice</title>
 </head>
 <body>
-    <form action="{{route('movie.store')}}" method="post">
+    <form action="/admin/movies/store" method="post">
         @csrf
         <p>タイトル</p>
         @if ($errors->has('title'))
@@ -42,7 +42,7 @@
         </select>
 
         <br>
-        <input type="checkbox" name="is_showing"  value='true'>上映中
+        <input type="checkbox" name="is_showing"  value={{true}}>上映中
 
         <p>概要</p>
         @if ($errors->has('description'))
