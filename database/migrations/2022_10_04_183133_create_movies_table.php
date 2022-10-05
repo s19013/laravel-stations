@@ -19,8 +19,8 @@ return new class extends Migration
             // 別のマイグレーションファイルに書いてマイグレーション実行するには->change()が必要になる
             // ->change()を使うには`doctrine/dbal package.`をインストールする必要がある
             // 面倒､今はまだ最初期なので今までのマイグレーションをロールバックしてこのファイルを変更するようにする
-            $table->text('title',1000)->unique()->comment('タイトル');
-            $table->text('title')->comment('タイトル');
+            // text()では長さをしていすることができないのでstringに返る
+            $table->string('title',255)->unique()->comment('タイトル');
             $table->text('image_url')->comment('写真のurl');
             $table->timestamps();
         });
