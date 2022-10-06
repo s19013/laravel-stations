@@ -30,9 +30,15 @@ Route::get('/movies', [MovieController::class, 'index']);
 
 Route::prefix('/admin/movies')->group(function () {
     Route::get('/' , [AdminMovieController::class, 'index']);
-    Route::get('/create'  , [AdminMovieController::class,'transitionToCreate']);
-    Route::post('/store'   , [AdminMovieController::class,'store']);
-    Route::get('/{id}/edit'   , [AdminMovieController::class,'transitionToEdit']);
-    Route::patch('/{id}/update', [AdminMovieController::class,'update']);
     Route::post('/search' , [AdminMovieController::class,'']);
+    Route::get('/create'  , [AdminMovieController::class,'transitionToCreate']);
+    Route::post('/store'  , [AdminMovieController::class,'store']);
+    Route::get('/{id}/edit'      ,[AdminMovieController::class,'transitionToEdit']);
+    Route::patch('/{id}/update'  ,[AdminMovieController::class,'update']);
+    Route::delete('/{id}/destroy',[AdminMovieController::class,'delete'])->name('movie.delete');
+
+    // 定義してないやつらの扱い
+    Route::fallback(function () {
+        return \App::abort(404);
+    });
 });
