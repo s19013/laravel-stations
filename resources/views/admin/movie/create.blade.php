@@ -34,15 +34,23 @@
         @endif
         <select name="published_year" >
 
-            <option value=2000 selected>2000</option>
+            <option value=2020 @if ((2020 === (int)old('published_year')) || old('published_year') == null)
+                selected
+            @endif>2020</option>
 
             @for ($i = 2021; $i <= 2030; $i++)
-                <option value="{{$i}}">{{$i}}</option>
+                <option value="{{$i}}"
+                @if ($i === (int)old('published_year'))
+                    selected
+                @endif
+                >{{$i}}</option>
             @endfor
         </select>
 
         <br>
-        <input type="checkbox" name="is_showing"  value={{true}}>上映中
+        <input type="checkbox" name="is_showing" value = "1"
+        @if ((int)old('is_showing') == "1") checked @endif
+        >上映中
 
         <p>概要</p>
         @if ($errors->has('description'))
