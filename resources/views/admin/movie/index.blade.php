@@ -10,6 +10,9 @@
     @if (session('message'))
         <p>{{ session('message') }}</p>
     @endif
+    <a href="/admin/movies/create">
+        <button type="button">新規作成</button>
+    </a>
     <table>
         <tr>
             <th></th>
@@ -17,6 +20,16 @@
                 <td>
                     <a href="/admin/movies/{{$movie->id}}/edit">
                         <button type="button">編集</button>
+                    </a>
+                </td>
+            @endforeach
+        </tr>
+        <tr>
+            <th></th>
+            @foreach ($movieList as $movie)
+                <td>
+                    <a href="/admin/movies/{{$movie->id}}/destroy">
+                        <button type="button">削除</button>
                     </a>
                 </td>
             @endforeach
