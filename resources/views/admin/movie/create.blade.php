@@ -48,9 +48,10 @@
         </select>
 
         <br>
-        <input type="checkbox" name="is_showing" value = "1"
+        <input type="checkbox" id="checkbox" onchange="changeCheckbox()"
         @if ((int)old('is_showing') == "1") checked @endif
         >上映中
+        <input type="hidden" id="is_showing" name="is_showing" value = {{old('is_showing',0)}}>
 
         <p>概要</p>
         @if ($errors->has('description'))
@@ -62,5 +63,11 @@
 
         <input type="submit" value="送信">
     </form>
+    <script>
+        function changeCheckbox(){
+            if (document.getElementById('checkbox').checked) { document.getElementById('is_showing').value = 1 }
+            else {document.getElementById('is_showing').value = 0 }
+        }
+    </script>
 </body>
 </html>
