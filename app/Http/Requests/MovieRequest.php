@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+// use Validator;
+
+use Illuminate\Validation\Validator;
 
 class MovieRequest extends FormRequest
 {
@@ -31,15 +35,28 @@ class MovieRequest extends FormRequest
      */
     public function rules()
     {
-
         // 2バイトトラップの処理とかあるけど今回はそういうの無視
         return [
             'title'       => 'required|unique:movies|max:220',
             'image_url'   => 'required|url',
             'description' => 'required',
-            'is_showing'  => 'required',
+            'is_showing'  => 'required', //<-こいつが原因フロントがわでどうにかしないと やはりチェックボックスをjsでいじらないと
             'published_year' => 'required',
+            // そもそもなんでチェックボックスにこだわるんだよトグルとか､ラジオボタンで十分でしょ!!
         ];
+    }
+
+    public function withValidator(Validator $validator)
+    {
+        // 新規
+        $validator->sometimes('title',['required', 'max:220', 'unique:movies'] , function ($input) {
+            return $this->method() == 'POST';
+        });
+
+        // 更新
+        $validator->sometimes('title',['required', 'max:220', Rule::unique('movies')->ignore($this->id)] , function ($input) {
+            return $this->method() == 'PATCH';
+        });
     }
 
     public function messages()
