@@ -12,6 +12,16 @@
     @endif
     <table>
         <tr>
+            <th></th>
+            @foreach ($movieList as $movie)
+                <td>
+                    <a href="/admin/movies/{{$movie->id}}/edit">
+                        <button type="button">編集</button>
+                    </a>
+                </td>
+            @endforeach
+        </tr>
+        <tr>
             <th>ID</th>
             @foreach ($movieList as $movie)
                 <td>{{$movie->id}}</td>
