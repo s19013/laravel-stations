@@ -28,11 +28,9 @@
             <th></th>
             @foreach ($movieList as $movie)
                 <td>
-                    {{-- <form action="/admin/movies/{{$movie->id}}/destroy" method="post" onsubmit="return finalCheck()"> --}}
-                    <form action="{{route('movie.delete',$movie->id)}}" method="post" onsubmit="return finalCheck()">
+                    <form action="/admin/movies/{{$movie->id}}/destroy" method="post" onsubmit="return finalCheck()">
                         @csrf
                         @method('DELETE')
-                        {{-- <input type="hidden" name="_method" value="DELETE"> --}}
                         <input type="submit" id='delete' value="削除">
                     </form>
                 </td>
