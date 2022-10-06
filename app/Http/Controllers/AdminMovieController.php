@@ -65,6 +65,15 @@ class AdminMovieController extends Controller
         return $this->redirectToIndex('更新しました');
     }
 
+    public function delete($id)
+    {
+        if (Movie::isExists($id)) {
+            Movie::deleteMovie($id);
+            return $this->redirectToIndex("{$id}番を削除しました");
+        }
+        return \App::abort(404);
+    }
+
     public function transitionToCreate() { return view('admin.movie.create'); }
 
     public function transitionToEdit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getMovieData($id)]); }

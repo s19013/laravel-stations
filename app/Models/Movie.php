@@ -45,11 +45,23 @@ class Movie extends Model
         });
     }
 
+    public static function deleteMovie($id)
+    {
+        DB::transaction(function () use($id){
+            Movie::where('id', '=',$id)->delete();
+        });
+    }
+
     // 単体データ取得
     public static function getMovieData($id)
     {
         // 1つだけとってくるからfirstで十分
         return Movie::select('*')->where('id','=',$id)->first();
+    }
+
+    public static function isExists($id)
+    {
+        return Movie::where('id','=',$id)->exists();
     }
 
 
