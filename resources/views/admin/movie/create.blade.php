@@ -34,11 +34,11 @@
         @endif
         <select name="published_year" >
 
-            <option value=2020 @if ((2020 === (int)old('published_year')) || old('published_year') == null)
+            <option value=2000 @if ((2000 === (int)old('published_year')) || old('published_year') == null)
                 selected
-            @endif>2020</option>
+            @endif>2000</option>
 
-            @for ($i = 2021; $i <= 2030; $i++)
+            @for ($i = 2001; $i <= 2030; $i++)
                 <option value="{{$i}}"
                 @if ($i === (int)old('published_year'))
                     selected
@@ -48,9 +48,10 @@
         </select>
 
         <br>
+        <p>on:上映中,off:上映予定</p>
         <input type="checkbox" id="checkbox" onchange="changeCheckbox()"
         @if ((int)old('is_showing') == "1") checked @endif
-        >上映中
+        ><label id='checkboxLabel'>上映予定</label>
         <input type="hidden" id="is_showing" name="is_showing" value = {{old('is_showing',0)}}>
 
         <p>概要</p>
@@ -65,8 +66,14 @@
     </form>
     <script>
         function changeCheckbox(){
-            if (document.getElementById('checkbox').checked) { document.getElementById('is_showing').value = 1 }
-            else {document.getElementById('is_showing').value = 0 }
+            if (document.getElementById('checkbox').checked) {
+                document.getElementById('is_showing').value = 1
+                document.getElementById('checkboxLabel').innerHTML = "上映中";
+            }
+            else {
+                document.getElementById('is_showing').value = 0
+                document.getElementById('checkboxLabel').innerHTML = "上映予定";
+            }
         }
     </script>
 </body>
