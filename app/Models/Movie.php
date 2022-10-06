@@ -20,7 +20,6 @@ class Movie extends Model
     // 登録
     public static function storeMovie($request)
     {
-        if (empty($request->is_showing)) {$request->is_showing = false;}
         DB::transaction(function () use($request){
             Movie::create([
                 'title'       => $request->title,
@@ -34,7 +33,6 @@ class Movie extends Model
 
     public static function updateMovie($request)
     {
-        if (empty($request->is_showing)) {$request->is_showing = false;}
         DB::transaction(function () use($request){
             Movie::where('id','=',$request->id)
             ->update([
