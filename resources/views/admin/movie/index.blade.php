@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Practice</title>
+    <link rel="stylesheet" href="\css\app.css">
 </head>
 <body>
     @if (session('message'))
@@ -13,9 +14,9 @@
     <a href="/admin/movies/create">
         <button type="button">新規作成</button>
     </a>
-    <table>
+    <table class="movies">
         <tr>
-            <th></th>
+            <td></td>
             @foreach ($movieList as $movie)
                 <td>
                     <a href="/admin/movies/{{$movie->id}}/edit">
@@ -25,7 +26,7 @@
             @endforeach
         </tr>
         <tr>
-            <th></th>
+            <td></td>
             @foreach ($movieList as $movie)
                 <td>
                     <form action="/admin/movies/{{$movie->id}}/destroy" method="post" onsubmit="return finalCheck()">
@@ -37,31 +38,33 @@
             @endforeach
         </tr>
         <tr>
-            <th>ID</th>
+            <td>ID</td>
             @foreach ($movieList as $movie)
                 <td>{{$movie->id}}</td>
             @endforeach
         </tr>
         <tr>
-            <th>タイトル</th>
+            <td>タイトル</td>
             @foreach ($movieList as $movie)
                 <td>{{$movie->title}}</td>
             @endforeach
         </tr>
         <tr>
-            <th>画像のurl</th>
+            <td>画像</td>
             @foreach ($movieList as $movie)
-                <td>{{$movie->image_url}}</td>
+            <td>
+                <img src="{{$movie->image_url}}" alt="">
+            </td>
             @endforeach
         </tr>
         <tr>
-            <th>公開年</th>
+            <td>公開年</td>
             @foreach ($movieList as $movie)
                 <td>{{$movie->published_year}}</td>
             @endforeach
         </tr>
         <tr>
-            <th>上映中かどうか</th>
+            <td>上映状態</td>
             @foreach ($movieList as $movie)
                 @if ($movie->is_showing)
                 <td>上映中</td>
@@ -72,24 +75,37 @@
             @endforeach
         </tr>
         <tr>
-            <th>概要</th>
+            <td>概要</td>
             @foreach ($movieList as $movie)
                 <td>{{$movie->description}}</td>
             @endforeach
         </tr>
         <tr>
-            <th>登録日時</th>
+            <td>登録日時</td>
             @foreach ($movieList as $movie)
                 <td>{{$movie->created_at}}</td>
             @endforeach
         </tr>
         <tr>
-            <th>更新日時 </th>
+            <td>更新日時 </td>
             @foreach ($movieList as $movie)
                 <td>{{$movie->updated_at}}</td>
             @endforeach
         </tr>
     </table>
+        {{-- @foreach ($movieList as $movie)
+            <div class="movie">
+                <a href="/admin/movies/{{$movie->id}}/edit">
+                    <button type="button">編集</button>
+                </a>
+                <form action="/admin/movies/{{$movie->id}}/destroy" method="post" onsubmit="return finalCheck()">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" id='delete' value="削除">
+                </form>
+            </div>
+        @endforeach --}}
+    </div>
     <script>
         // onSubmit="return check()"
         function finalCheck() {
