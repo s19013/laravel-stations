@@ -2,9 +2,7 @@
 
 namespace App\tool;
 
-use Illuminate\Http\Request;
-
-class searchToolKit extends Controller
+class searchToolKit
 {
     //sqlでlike検索する前にするエスケープ処理
     public function sqlEscape($arg)
