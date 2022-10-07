@@ -26,16 +26,18 @@ Route::get('/practice2', [PracticeController::class, 'sample2']);
 Route::get('/practice3', [PracticeController::class, 'sample3']);
 Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
+// Route::prefix()
 Route::get('/movies', [MovieController::class, 'index']);
 
-Route::prefix('/admin/movies')->group(function () {
-    Route::get('/' , [AdminMovieController::class, 'index']);
-    Route::post('/search' , [AdminMovieController::class,'']);
-    Route::get('/create'  , [AdminMovieController::class,'transitionToCreate']);
-    Route::post('/store'  , [AdminMovieController::class,'store']);
-    Route::get('/{id}/edit'      ,[AdminMovieController::class,'transitionToEdit']);
-    Route::patch('/{id}/update'  ,[AdminMovieController::class,'update']);
-    Route::delete('/{id}/destroy',[AdminMovieController::class,'delete'])->name('movie.delete');
+// 試しにコントローラーもまとめたけど多分あまり良い書き方ではないかもしれない｡本番ではいろんなコントローラーを使うかもしれないし｡
+Route::controller(AdminMovieController::class)->prefix('/admin/movies')->group(function () {
+    Route::get('/' , 'index');
+    Route::post('/search' , '');
+    Route::get('/create'  , 'transitionToCreate');
+    Route::post('/store'  , 'store');
+    Route::get('/{id}/edit'      ,'transitionToEdit');
+    Route::patch('/{id}/update'  ,'update');
+    Route::delete('/{id}/destroy','delete');
 
     // 定義してないやつらの扱い
     Route::fallback(function () {
