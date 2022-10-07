@@ -59,20 +59,24 @@ class Movie extends Model
         $searchToolKit = new searchToolKit();
 
         // %と_をエスケープ
-        $escaped = $searchToolKit->sqlEscape($articleToSearch);
+        $escaped = $searchToolKit->sqlEscape($request->keyword);
 
         //and検索のために空白区切りでつくった配列を用意
         $wordListToSearch = $searchToolKit->preparationToAndSearch($escaped);
-
 
         // 基本クエリ
         $query = Movie::select('*');
 
         // キーワード追加
         foreach($wordListToSearch as $word){
-            $query->where('title','like',$word);
-            $query->where('description','like',$word);
+            $query->where(function ($query) use ($word) {
+                // タイトルか概要のどちらかなのでOr
+                $query->where('title','like',"%$word%")
+                ->orWhere('description','like',"%$word%");
+            });
         }
+
+        // () and 公開状態 という書き方のために上記
 
         // 検索対象
         if ($request->target == "showing") { $query->where('is_showing','=',1); }
