@@ -14,7 +14,7 @@
     <a href="/admin/movies/create">
         <button type="button">新規作成</button>
     </a>
-    <table class="movies">
+    <table class="movieTable">
         <tr>
             <td></td>
             @foreach ($movieList as $movie)

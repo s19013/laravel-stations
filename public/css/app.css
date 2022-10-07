@@ -24,7 +24,7 @@
 
 /*  */
 
-.movies{
+.movieTable{
     overflow:auto;
     width: 100%;
     table-layout: fixed;
@@ -32,11 +32,11 @@
     word-break   :break-word;
     overflow-wrap:normal;
 }
-table.movies img {
-    width: 5rem;
+table.movieTable img {
+    width: 8rem;
     height: auto;
     }
-table.movies td {
+table.movieTable td {
     width: 10rem;
     border: solid 1px;
     margin:0.5rem 0;
