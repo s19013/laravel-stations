@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\AdminMovieController;
+use App\Http\Controllers\SheetController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,8 @@ Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 // Route::prefix()
 Route::get('/movies', [MovieController::class, 'index']);
+
+Route::get('/sheets',[SheetController::class,'index']);
 
 // 試しにコントローラーもまとめたけど多分あまり良い書き方ではないかもしれない｡本番ではいろんなコントローラーを使うかもしれないし｡
 Route::controller(AdminMovieController::class)->prefix('/admin/movies')->group(function () {
