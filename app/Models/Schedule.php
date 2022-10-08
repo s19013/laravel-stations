@@ -9,8 +9,11 @@ class Schedule extends Model
 {
     use HasFactory;
 
-    public static function getMovieScheduleAndData()
+    public static function getMovieSchedule($id)
     {
-
+        return Schedule::select('schedules.start_time','schedules.end_time')
+        ->join('movies','schedules.movie_id','=','movies.id')
+        ->where('schedules.movie_id','=',$id)
+        ->get();
     }
 }

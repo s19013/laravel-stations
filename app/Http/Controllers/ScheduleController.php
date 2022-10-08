@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\Movie;
+
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -12,9 +14,12 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        return view('movie.schedule', [
+            'movieScheduleList' => Schedule::getMovieSchedule($id),
+            'movieData'         => Movie::getMovieData($id)
+        ]);
     }
 
     /**

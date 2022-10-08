@@ -7,6 +7,7 @@ use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\AdminMovieController;
 use App\Http\Controllers\SheetController;
+use App\Http\Controllers\ScheduleController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +29,13 @@ Route::get('/practice3', [PracticeController::class, 'sample3']);
 Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 // Route::prefix()
-Route::get('/movies', [MovieController::class, 'index']);
+
+Route::prefix('/movies')->group(function (){
+    Route::get('/', [MovieController::class, 'index']);
+    Route::get('/{id}', [ScheduleController::class, 'index']);
+});
+
+
 
 Route::get('/sheets',[SheetController::class,'index']);
 
