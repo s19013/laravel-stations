@@ -31,11 +31,16 @@ class MovieModelTest extends TestCase
         Movie::factory()->count(5)->create([ 'is_showing' => '1' ]);
         Movie::factory()->count(5)->create([ 'is_showing' => '0' ]);
 
+        print(Movie::select('id','is_showing')->get());
+
         // 検索結果を取り出す
         $response = $movieModel->search((object)[
             'keyword' => null,
-            'target'  => null,
+            'is_showing'  => null,
         ]);
+
+        echo '\n';
+        print($response);
 
         // 10個とってこれているか
         $this->assertCount(10, $response);
@@ -44,7 +49,7 @@ class MovieModelTest extends TestCase
     // 期待
     // 公開中のデータを取ってくる
     // 条件
-    // target = 'showing'
+    // is_showing = '1'
     public function test_search_公開中のデータを取ってくる()
     {
         $movieModel = new Movie();
@@ -57,7 +62,7 @@ class MovieModelTest extends TestCase
         // 検索結果を取り出す
         $response = $movieModel->search((object)[
             'keyword' => null,
-            'target'  => 'showing',
+            'is_showing'  => '1',
         ]);
 
         // 4個とってこれているか
@@ -67,7 +72,7 @@ class MovieModelTest extends TestCase
     // 期待
     // 非公開のデータを取ってくる
     // 条件
-    // target = 'not showing'
+    // is_showing = 'not 1'
     public function test_search_非公開のデータを取ってくる()
     {
         $movieModel = new Movie();
@@ -80,7 +85,7 @@ class MovieModelTest extends TestCase
         // 検索結果を取り出す
         $response = $movieModel->search((object)[
             'keyword' => null,
-            'target'  => 'not showing',
+            'is_showing'  => '0',
         ]);
 
         // 4個とってこれているか
@@ -108,7 +113,7 @@ class MovieModelTest extends TestCase
         // 検索結果を取り出す
         $response = $movieModel->search((object)[
             'keyword' => 'abc',
-            'target'  => null,
+            'is_showing'  => null,
         ]);
 
         $hitTitleCount = 0;
@@ -161,7 +166,7 @@ class MovieModelTest extends TestCase
         // 検索結果を取り出す
         $response = $movieModel->search((object)[
             'keyword' => 'abc',
-            'target'  => 'showing',
+            'is_showing'  => '1',
         ]);
 
         $hitTitleCount = 0;
@@ -214,7 +219,7 @@ class MovieModelTest extends TestCase
         // 検索結果を取り出す
         $response = $movieModel->search((object)[
             'keyword' => 'abc',
-            'target'  => 'showing',
+            'is_showing'  => '0',
         ]);
 
         $hitTitleCount = 0;

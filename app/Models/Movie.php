@@ -79,8 +79,10 @@ class Movie extends Model
         // () and 公開状態 という書き方のために上記
 
         // 検索対象
-        if ($request->target == "showing") { $query->where('is_showing','=',1); }
-        if ($request->target == "not showing") { $query->where('is_showing','=',0); }
+        // リクエストに送られるのはすべて""文字列""
+        if ($request->is_showing === '1') { $query->where('is_showing','=',1); }
+        //  == だとnullも0扱いになるので ===
+        if ($request->is_showing === '0') { $query->where('is_showing','=',0); }
 
         // 取得
         return $query->get();
