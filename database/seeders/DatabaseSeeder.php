@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Practice;
 use App\Models\Movie;
+use App\Models\Schedule;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Movie::factory(20)->create();
+        // Movie::factory(20)->create();
+        Schedule::factory(20)->create();
         $this->call(SheetTableSeeder::class);
     }
 }
