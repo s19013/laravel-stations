@@ -8,9 +8,9 @@ use App\Models\Movie;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movieList =Movie::all();
+        $movieList =Movie::search($request);
         return view('movie.index', ['movieList' => $movieList]);
     }
 }
