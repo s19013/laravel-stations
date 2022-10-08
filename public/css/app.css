@@ -41,3 +41,17 @@ table.movieTable td {
     border: solid 1px;
     margin:0.5rem 0;
 }
+
+.movies {
+    display: flex;
+    flex-wrap :wrap;
+}
+
+.movie{
+    width: 20rem;
+    margin: 1rem;
+}
+
+.movie img {
+    width: 20rem;
+}
