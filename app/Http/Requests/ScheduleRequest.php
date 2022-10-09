@@ -38,6 +38,7 @@ class ScheduleRequest extends FormRequest
         // そもそもなんでチェックボックスにこだわるんだよトグルとか､ラジオボタンで十分でしょ!!
         // 2バイトトラップの処理とかあるけど今回はそういうの無視
         return [
+            'movie_id' => 'required',
             'start_time_date' => 'required|date|date_format:Y-m-d',
             'start_time_time' => 'required|date_format:H:i',
             'end_time_date'   => 'required|date|date_format:Y-m-d',
@@ -48,6 +49,7 @@ class ScheduleRequest extends FormRequest
     public function messages()
     {
         return [
+            'movie_id.required' => 'idがない',
             'start_time_date.required'    => '入力してください',
             'start_time_date.date_format' => '年-月-日の形式で入力してください',
             'start_time_time.required'    => '入力してください',
