@@ -33,14 +33,6 @@ class AdminMovieController extends Controller
         // チェックボックスにチェックがついてなかった時の処理
         // if (empty($request->is_showing)) { $request['is_showing'] = 0; }
 
-        $request->validate([
-            'title'       => 'required|unique:movies|max:220',
-            'image_url'   => 'required|url',
-            'description' => 'required',
-            'is_showing'  => 'required',
-            'published_year' => 'required',
-        ]);
-
         // 登録
         Movie::storeMovie($request);
 
@@ -52,15 +44,6 @@ class AdminMovieController extends Controller
     public function update(MovieRequest $request)
     {
         // if (empty($request->is_showing)) { $request['is_showing'] = 0; }
-
-        // 自分以外に同じタイトルがないか
-        $request->validate([
-            'title'       => ['required', 'max:220', Rule::unique('movies')->ignore($request->id)],
-            'image_url'   => 'required|url',
-            'description' => 'required',
-            'is_showing'  => 'required',
-            'published_year' => 'required',
-        ]);
 
         Movie::updateMovie($request);
 
