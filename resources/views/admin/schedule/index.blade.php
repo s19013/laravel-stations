@@ -19,7 +19,7 @@
     @endif
 
     <a href="/admin/movies/{{$movieData->id}}/schedule/create">
-        <button type="button" value="追加"></button>
+        <button type="button" >追加</button>
     </a>
     <table>
         <tr>
@@ -34,12 +34,12 @@
                 <td>{{date('H:i', strtotime($schedule->end_time));}}</td>
                 <td>
                     <a href="/admin/movies/{{$movieData->id}}/schedule/edit">
-                        <button type="button" value="編集"></button>
+                        <button type="button">編集</button>
                     </a>
                 </td>
                 <td>
                     <a href="/admin/movies/{{$movieData->id}}/schedule/destory">
-                        <button type="button" value="削除"></button>
+                        <button type="button">削除</button>
                     </a>
                 </td>
             </tr>
