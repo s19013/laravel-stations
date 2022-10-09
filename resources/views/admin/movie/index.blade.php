@@ -103,27 +103,11 @@
             @endforeach
         </tr>
     </table>
-        {{-- @foreach ($movieList as $movie)
-            <div class="movie">
-                <a href="/admin/movies/{{$movie->id}}/edit">
-                    <button type="button">編集</button>
-                </a>
-                <form action="/admin/movies/{{$movie->id}}/destroy" method="post" onsubmit="return finalCheck()">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" id='delete' value="削除">
-                </form>
-            </div>
-        @endforeach --}}
     </div>
     <script>
-        // onSubmit="return check()"
         function finalCheck() {
             window.confirm("削除しますか?");
         }
-        // document.getElementById('delete').addEventListener('click', function () {
-        //     window.confirm("削除しますか?");
-        // });
     </script>
 </body>
 </html>
