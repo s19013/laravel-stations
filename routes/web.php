@@ -51,9 +51,9 @@ Route::prefix('/admin/movies')->group(function (){
 
     Route::get('/{id}',[AdminScheduleController::class,'index']);
     Route::get('/{id}/schedule/create',[AdminScheduleController::class,'create']);
-    Route::get('/{id}/schedule/store',[AdminScheduleController::class,'store']);
+    Route::post('/{id}/schedule/store',[AdminScheduleController::class,'store']);
     Route::get('/{id}/schedule/edit',[AdminScheduleController::class,'edit']);
-    Route::get('/{id}/schedule/update',[AdminScheduleController::class,'update']);
+    Route::post('/{id}/schedule/update',[AdminScheduleController::class,'update']);
     Route::get('/{id}/schedule/destroy',[AdminScheduleController::class,'destroy']);
 
 
