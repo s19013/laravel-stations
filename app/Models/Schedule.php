@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class Schedule extends Model
 {
     use HasFactory;
@@ -30,8 +32,8 @@ class Schedule extends Model
         DB::transaction(function () use($request){
             Schedule::create([
                 'movie_id'   => $request->movie_id,
-                'start_time' => $request->start_time,
-                'end_time'   => $request->end_time,
+                'start_time' => $request->start_time_time,
+                'end_time'   => $request->end_time_time,
             ]);
         });
     }
@@ -41,8 +43,8 @@ class Schedule extends Model
         DB::transaction(function () use($request){
             Schedule::where('id','=',$request->id)
             ->update([
-                'start_time' => $request->start_time,
-                'end_time'   => $request->end_time,
+                'start_time' => $request->start_time_time,
+                'end_time'   => $request->end_time_time,
             ]);
         });
     }
