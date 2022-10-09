@@ -18,15 +18,30 @@
         <p>上映予定</p>
     @endif
 
+    <a href="/admin/movies/{{$movieData->id}}/schedule/create">
+        <button type="button" value="追加"></button>
+    </a>
     <table>
         <tr>
             <th>開始</th>
             <th>終了</th>
+            <th></th>
+            <th></th>
         </tr>
         @foreach ($movieScheduleList as $schedule)
             <tr>
                 <td>{{date('H:i', strtotime($schedule->start_time));}}</td>
                 <td>{{date('H:i', strtotime($schedule->end_time));}}</td>
+                <td>
+                    <a href="/admin/movies/{{$movieData->id}}/schedule/edit">
+                        <button type="button" value="編集"></button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/admin/movies/{{$movieData->id}}/schedule/destory">
+                        <button type="button" value="削除"></button>
+                    </a>
+                </td>
             </tr>
         @endforeach
     </table>
