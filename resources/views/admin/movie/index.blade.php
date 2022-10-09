@@ -29,6 +29,16 @@
             <td></td>
             @foreach ($movieList as $movie)
                 <td>
+                    <a href="/admin/movies/{{$movie->id}}">
+                        <button type="button">スケジュール</button>
+                    </a>
+                </td>
+            @endforeach
+        </tr>
+        <tr>
+            <td></td>
+            @foreach ($movieList as $movie)
+                <td>
                     <form action="/admin/movies/{{$movie->id}}/destroy" method="post" onsubmit="return finalCheck()">
                         @csrf
                         @method('DELETE')
