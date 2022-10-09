@@ -35,29 +35,33 @@ class MovieRequest extends FormRequest
      */
     public function rules()
     {
+        // そもそもなんでチェックボックスにこだわるんだよトグルとか､ラジオボタンで十分でしょ!!
         // 2バイトトラップの処理とかあるけど今回はそういうの無視
-        return [
-            'title'       => 'required|unique:movies|max:220',
+        $baseRule = [
             'image_url'   => 'required|url',
             'description' => 'required',
-            'is_showing'  => 'required', //<-こいつが原因フロントがわでどうにかしないと やはりチェックボックスをjsでいじらないと
+            'is_showing'  => 'required',
             'published_year' => 'required',
-            // そもそもなんでチェックボックスにこだわるんだよトグルとか､ラジオボタンで十分でしょ!!
         ];
+
+        if ($this->method() == 'POST') { $baseRule['title'] = ['required', 'max:220', 'unique:movies']; }
+        if ($this->method() == 'PATCH') { $baseRule['title'] = ['required', 'max:220', Rule::unique('movies')->ignore($this->id)] ; }
+
+        return $baseRule;
     }
 
-    public function withValidator(Validator $validator)
-    {
-        // 新規
-        $validator->sometimes('title',['required', 'max:220', 'unique:movies'] , function ($input) {
-            return $this->method() == 'POST';
-        });
+    // public function withValidator(Validator $validator)
+    // {
+    //     // 新規
+    //     $validator->sometimes('title',['required', 'max:220', 'unique:movies'] , function ($input) {
+    //         return $this->method() == 'POST';
+    //     });
 
-        // 更新
-        $validator->sometimes('title',['required', 'max:220', Rule::unique('movies')->ignore($this->id)] , function ($input) {
-            return $this->method() == 'PATCH';
-        });
-    }
+    //     // 更新
+    //     $validator->sometimes('title',['required', 'max:220', Rule::unique('movies')->ignore($this->id)] , function ($input) {
+    //         return $this->method() == 'PATCH';
+    //     });
+    // }
 
     public function messages()
     {
