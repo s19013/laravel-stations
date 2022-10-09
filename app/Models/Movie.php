@@ -89,7 +89,7 @@ class Movie extends Model
     }
 
     // 単体データ取得
-    public static function getMovieData($id)
+    public static function getSingleMovieData($id)
     {
         // 1つだけとってくるからfirstで十分
         return Movie::select('*')->where('id','=',$id)->first();

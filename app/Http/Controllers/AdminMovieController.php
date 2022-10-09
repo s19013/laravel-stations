@@ -39,7 +39,7 @@ class AdminMovieController extends Controller
         return $this->redirectToIndex('映画を追加しました');
     }
 
-    public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getMovieData($id)]); }
+    public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getSingleMovieData($id)]); }
 
     public function update(MovieRequest $request)
     {
