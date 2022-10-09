@@ -47,7 +47,7 @@ Route::prefix('/admin/movies')->group(function (){
     Route::post('/store'  , [AdminMovieController::class,'store']);
     Route::get('/{id}/edit'      ,[AdminMovieController::class,'edit']);
     Route::patch('/{id}/update'  ,[AdminMovieController::class,'update']);
-    Route::delete('/{id}/destroy',[AdminMovieController::class,'delete']);
+    Route::delete('/{id}/destroy',[AdminMovieController::class,'destroy']);
 
     Route::get('/{id}',[AdminScheduleController::class,'index']);
     Route::get('/{id}/schedule/create',[AdminScheduleController::class,'create']);
