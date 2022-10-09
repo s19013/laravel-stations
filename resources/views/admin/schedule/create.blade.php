@@ -50,6 +50,7 @@
         <input name='end_time_time' placeholder="例 08:06" type="text" value="{{old('end_time_time')}}" required >
 
         <input type="submit" value="送信">
+    </form>
 
 </body>
 </html>
