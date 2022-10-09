@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ScheduleRequest;
 
 use App\Models\Movie;
 use App\Models\Schedule;
@@ -17,7 +18,7 @@ class AdminScheduleController extends Controller
     public function index($id)
     {
         return view('admin.schedule.index', [
-            'movieScheduleList' => Schedule::getMovieSchedule($id),
+            'movieScheduleList' => Schedule::getScheduleData($id),
             'movieData'         => Movie::getMovieData($id)
         ]);
     }
@@ -31,69 +32,32 @@ class AdminScheduleController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($id) { return view('admin.schedule.create')->with(['movieId' => $id]); }
+
+    public function store(ScheduleRequest $request)
     {
-        //
+        // 登録
+        Schedule::storeSchedule($request);
+
+        return $this->redirectToIndex('映画を追加しました');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit($id) { return view('admin.schedule.edit')->with(['schedule' => Schedule::getScheduleData($id)]); }
+
+    public function update(ScheduleRequest $request)
     {
-        //
+        Schedule::updateSchedule($request);
+
+        return $this->redirectToIndex('更新しました');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Schedule $schedule)
+    public function delete($id)
     {
-        //
+        if (Schedule::isExists($id)) {
+            Schedule::deleteSchedule($id);
+            return $this->redirectToIndex("{$id}番を削除しました");
+        }
+        return \App::abort(404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Schedule $schedule)
-    {
-        //
-    }
 }
