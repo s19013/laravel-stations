@@ -17,7 +17,10 @@ class Schedule extends Model
         'updated_at',
     ];
 
-    public $incrementing = true;
+    protected $dates = [
+        'start_time',
+        'end_time'
+    ];
 
     //belongsTo設定
     // 所属元を設定
