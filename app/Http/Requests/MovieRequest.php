@@ -45,6 +45,8 @@ class MovieRequest extends FormRequest
         ];
 
         if ($this->method() == 'POST') { $baseRule['title'] = ['required', 'max:220', 'unique:movies']; }
+
+        // 自分以外に同じタイトルがないか
         if ($this->method() == 'PATCH') { $baseRule['title'] = ['required', 'max:220', Rule::unique('movies')->ignore($this->id)] ; }
 
         return $baseRule;
