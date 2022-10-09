@@ -50,8 +50,8 @@ Route::prefix('/admin/movies')->group(function (){
     Route::delete('/{id}/destroy',[AdminMovieController::class,'destroy']);
 
     Route::get('/{id}',[AdminScheduleController::class,'index']);
-    Route::get('/{id}/schedule/create',[AdminScheduleController::class,'create']);
-    Route::post('/{id}/schedule/store',[AdminScheduleController::class,'store']);
+    Route::get('/{id}/schedules/create',[AdminScheduleController::class,'create']);
+    Route::post('/{id}/schedules/store',[AdminScheduleController::class,'store']);
 
 
     // 定義してないやつらの扱い
@@ -60,7 +60,7 @@ Route::prefix('/admin/movies')->group(function (){
     });
 });
 
-Route::prefix('admin/schedule')->group(function (){
+Route::prefix('admin/schedules')->group(function (){
 
     Route::get('/{id}/edit',[AdminScheduleController::class,'edit']);
     Route::patch('/{id}/update',[AdminScheduleController::class,'update']);

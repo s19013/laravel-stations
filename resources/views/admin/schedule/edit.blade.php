@@ -7,7 +7,7 @@
     <title>Practice</title>
 </head>
 <body>
-    <form action="/admin/schedule/{{$scheduleId}}/update" method="post">
+    <form action="/admin/schedules/{{$scheduleId}}/update" method="post">
         @csrf
         @method("PATCH")
 

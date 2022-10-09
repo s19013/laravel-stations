@@ -17,7 +17,7 @@
     @else
         <p>上映予定</p>
     @endif
-    <a href="/admin/movies/{{$movieData->id}}/schedule/create">
+    <a href="/admin/movies/{{$movieData->id}}/schedules/create">
         <button type="button" >追加</button>
     </a>
     <table>
@@ -32,12 +32,12 @@
                 <td>{{date('H:i', strtotime($schedule->start_time));}}</td>
                 <td>{{date('H:i', strtotime($schedule->end_time));}}</td>
                 <td>
-                    <a href="/admin/schedule/{{$schedule->id}}/edit">
+                    <a href="/admin/schedules/{{$schedule->id}}/edit">
                         <button type="button">編集</button>
                     </a>
                 </td>
                 <td>
-                    <form action="/admin/schedule/{{$schedule->id}}/destroy" method="post" onsubmit="return finalCheck()">
+                    <form action="/admin/schedules/{{$schedule->id}}/destroy" method="post" onsubmit="return finalCheck()">
                         @csrf
                         @method('DELETE')
                         <input type="submit" id='delete' value="削除">

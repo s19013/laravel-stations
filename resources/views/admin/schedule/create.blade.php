@@ -7,7 +7,7 @@
     <title>Practice</title>
 </head>
 <body>
-    <form action="/admin/movies/{{$movieId}}/schedule/store" method="post">
+    <form action="/admin/movies/{{$movieId}}/schedules/store" method="post">
         @csrf
         <input type="hidden" name="movie_id" value={{$movieId}}>
 
