@@ -19,7 +19,7 @@ class AdminScheduleController extends Controller
     {
         return view('admin.schedule.index', [
             'movieScheduleList' => Schedule::getScheduleData($id),
-            'movieData'         => Movie::getMovieData($id)
+            'movieData'         => Movie::getSingleMovieData($id)
         ]);
     }
 
@@ -39,23 +39,28 @@ class AdminScheduleController extends Controller
         // 登録
         Schedule::storeSchedule($request);
 
-        return $this->redirectToIndex('映画を追加しました');
+        return $this->redirectToIndex("{$request->id}にスケジュールを追加しました");
     }
 
-    public function edit($id) { return view('admin.schedule.edit')->with(['schedule' => Schedule::getScheduleData($id)]); }
+    public function edit($id) {
+        return view('admin.schedule.edit')->with([
+            'movieSchedule' => Schedule::getSingleScheduleData($id),
+            'scheduleId'=> $id
+        ]);
+    }
 
     public function update(ScheduleRequest $request)
     {
         Schedule::updateSchedule($request);
 
-        return $this->redirectToIndex('更新しました');
+        return $this->redirectToIndex("{$request->id}のスケジュールを変更しました");
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         if (Schedule::isExists($id)) {
             Schedule::deleteSchedule($id);
-            return $this->redirectToIndex("{$id}番を削除しました");
+            return $this->redirectToIndex("{$id}のスケジュールを削除しました");
         }
         return \App::abort(404);
     }

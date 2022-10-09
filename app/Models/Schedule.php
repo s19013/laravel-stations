@@ -19,10 +19,17 @@ class Schedule extends Model
 
     public static function getScheduleData($id)
     {
-        return Schedule::select('schedules.start_time','schedules.end_time')
+        return Schedule::select('schedules.id','schedules.movie_id',"schedules.start_time","schedules.end_time")
         ->join('movies','schedules.movie_id','=','movies.id')
         ->where('schedules.movie_id','=',$id)
         ->get();
+    }
+
+    public static function getSingleScheduleData($id)
+    {
+        return Schedule::select('*')
+        ->where('id','=',$id)
+        ->first();
     }
 
 
