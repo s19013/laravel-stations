@@ -19,6 +19,13 @@ class Movie extends Model
         'updated_at',
     ];
 
+    //hasMany設定
+    // リレーションシップ設定
+    public function schedules()
+    {
+        return $this->hasMany('App\Models\Schedule');
+    }
+
     // 登録
     public static function storeMovie($request)
     {

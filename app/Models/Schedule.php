@@ -17,6 +17,15 @@ class Schedule extends Model
         'updated_at',
     ];
 
+    public $incrementing = true;
+
+    //belongsTo設定
+    // 所属元を設定
+    public function Movies()
+    {
+       return $this->belongsTo('App\Models\Movie::class');
+    }
+
     public static function getScheduleData($id)
     {
         return Schedule::select('schedules.id','schedules.movie_id',"schedules.start_time","schedules.end_time")
