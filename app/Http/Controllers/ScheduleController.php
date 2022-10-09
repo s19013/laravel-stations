@@ -17,7 +17,7 @@ class ScheduleController extends Controller
     public function index($id)
     {
         return view('movie.schedule', [
-            'movieScheduleList' => Schedule::getMovieSchedule($id),
+            'movieScheduleList' => Schedule::getScheduleData($id),
             'movieData'         => Movie::getMovieData($id)
         ]);
     }
