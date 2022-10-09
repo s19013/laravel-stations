@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\AdminMovieController;
+use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\SheetController;
 use App\Http\Controllers\ScheduleController;
 /*
@@ -39,15 +40,26 @@ Route::prefix('/movies')->group(function (){
 
 Route::get('/sheets',[SheetController::class,'index']);
 
-// 試しにコントローラーもまとめたけど多分あまり良い書き方ではないかもしれない｡本番ではいろんなコントローラーを使うかもしれないし｡
-Route::controller(AdminMovieController::class)->prefix('/admin/movies')->group(function () {
-    Route::get('/' , 'index');
-    Route::post('/search' , '');
-    Route::get('/create'  , 'transitionToCreate');
-    Route::post('/store'  , 'store');
-    Route::get('/{id}/edit'      ,'transitionToEdit');
-    Route::patch('/{id}/update'  ,'update');
-    Route::delete('/{id}/destroy','delete');
+Route::prefix('/admin/movies')->group(function (){
+    Route::get('/' , [AdminMovieController::class,'index']);
+    Route::post('/search' , [AdminMovieController::class,'']);
+    Route::get('/create'  , [AdminMovieController::class,'create']);
+    Route::post('/store'  , [AdminMovieController::class,'store']);
+    Route::get('/{id}/edit'      ,[AdminMovieController::class,'edit']);
+    Route::patch('/{id}/update'  ,[AdminMovieController::class,'update']);
+    Route::delete('/{id}/destroy',[AdminMovieController::class,'delete']);
+
+    Route::get('/{id}',[AdminScheduleController::class,'index']);
+    Route::get('/{id}/schedule/create',[AdminScheduleController::class,'create']);
+    Route::get('/{id}/schedule/store',[AdminScheduleController::class,'store']);
+    Route::get('/{id}/schedule/edit',[AdminScheduleController::class,'edit']);
+    Route::get('/{id}/schedule/update',[AdminScheduleController::class,'update']);
+    Route::get('/{id}/schedule/destroy',[AdminScheduleController::class,'destroy']);
+
+
+
+
+
 
     // 定義してないやつらの扱い
     Route::fallback(function () {
