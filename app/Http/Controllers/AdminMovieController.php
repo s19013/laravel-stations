@@ -8,8 +8,6 @@ use App\Http\Requests\MovieRequest;
 use Illuminate\Validation\Rule;
 use App\Models\Movie;
 
-
-
 class AdminMovieController extends Controller
 {
     public function index()
@@ -28,7 +26,9 @@ class AdminMovieController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function create() { return view('admin.movie.create'); }
+
+    public function store(MovieRequest $request)
     {
         // チェックボックスにチェックがついてなかった時の処理
         // if (empty($request->is_showing)) { $request['is_showing'] = 0; }
@@ -47,7 +47,9 @@ class AdminMovieController extends Controller
         return $this->redirectToIndex('映画を追加しました');
     }
 
-    public function update(Request $request)
+    public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getMovieData($id)]); }
+
+    public function update(MovieRequest $request)
     {
         // if (empty($request->is_showing)) { $request['is_showing'] = 0; }
 
@@ -73,10 +75,5 @@ class AdminMovieController extends Controller
         }
         return \App::abort(404);
     }
-
-    public function transitionToCreate() { return view('admin.movie.create'); }
-
-    public function transitionToEdit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getMovieData($id)]); }
-
 
 }
