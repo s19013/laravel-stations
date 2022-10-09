@@ -50,7 +50,7 @@ class AdminMovieController extends Controller
         return $this->redirectToIndex('更新しました');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         if (Movie::isExists($id)) {
             Movie::deleteMovie($id);

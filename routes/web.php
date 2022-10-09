@@ -52,17 +52,17 @@ Route::prefix('/admin/movies')->group(function (){
     Route::get('/{id}',[AdminScheduleController::class,'index']);
     Route::get('/{id}/schedule/create',[AdminScheduleController::class,'create']);
     Route::post('/{id}/schedule/store',[AdminScheduleController::class,'store']);
-    Route::get('/{id}/schedule/edit',[AdminScheduleController::class,'edit']);
-    Route::post('/{id}/schedule/update',[AdminScheduleController::class,'update']);
-    Route::get('/{id}/schedule/destroy',[AdminScheduleController::class,'destroy']);
-
-
-
-
 
 
     // 定義してないやつらの扱い
     Route::fallback(function () {
         return \App::abort(404);
     });
+});
+
+Route::prefix('admin/schedule')->group(function (){
+
+    Route::get('/{id}/edit',[AdminScheduleController::class,'edit']);
+    Route::patch('/{id}/update',[AdminScheduleController::class,'update']);
+    Route::delete('/{id}/destroy',[AdminScheduleController::class,'destroy']);
 });
