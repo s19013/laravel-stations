@@ -25,11 +25,10 @@ class AdminScheduleController extends Controller
         ]);
     }
 
-    public function redirectToIndex($message = null)
+    public function redirectToIndex($movie_id,$message = null)
     {
-        $movieList = Movie::all();
-        return redirect('/admin/movies/')->with([
-            'movieList' => $movieList,
+        return redirect("/admin/movies/${movie_id}")->with([
+            'movie' => Movie::with('schedules')->find($movie_id),
             'message'   => $message,
         ]);
     }
@@ -41,28 +40,27 @@ class AdminScheduleController extends Controller
         // 登録
         Schedule::storeSchedule($request);
 
-        return $this->redirectToIndex("{$request->id}にスケジュールを追加しました");
+        return $this->redirectToIndex($request->movie_id,"{$request->id}にスケジュールを追加しました");
     }
 
     public function edit($id) {
         return view('admin.schedule.edit')->with([
             'movieSchedule' => Schedule::getSingleScheduleData($id),
-            'scheduleId'=> $id
         ]);
     }
 
-    public function update(ScheduleRequest $request)
+    public function update($id,ScheduleRequest $request)
     {
-        Schedule::updateSchedule($request);
+        Schedule::updateSchedule($id,$request);
 
-        return $this->redirectToIndex("{$request->id}のスケジュールを変更しました");
+        return $this->redirectToIndex($request->movie_id,"{$id}のスケジュールを変更しました");
     }
 
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
         if (Schedule::isExists($id)) {
             Schedule::deleteSchedule($id);
-            return $this->redirectToIndex("{$id}のスケジュールを削除しました");
+            return $this->redirectToIndex($request->movie_id,"{$id}のスケジュールを削除しました");
         }
         return \App::abort(404);
     }
