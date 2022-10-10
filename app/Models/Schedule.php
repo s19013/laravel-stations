@@ -39,9 +39,7 @@ class Schedule extends Model
 
     public static function getSingleScheduleData($id)
     {
-        return Schedule::select('*')
-        ->where('id','=',$id)
-        ->first();
+        return Schedule::find($id);
     }
 
 
@@ -60,7 +58,7 @@ class Schedule extends Model
     public static function updateSchedule($request)
     {
         DB::transaction(function () use($request){
-            Schedule::where('id','=',$request->id)
+            Schedule::where('id','=',$request->schedule_id)
             ->update([
                 'start_time' => $request->start_time_date." ".$request->start_time_time,
                 'end_time'   => $request->end_time_date." ".$request->end_time_time,
