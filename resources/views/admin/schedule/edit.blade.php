@@ -11,7 +11,7 @@
         @csrf
         @method("PATCH")
 
-        <input type="hidden" name="scheduleId" value={{$scheduleId}}>
+        <input type="hidden" name="schedule_id" value={{$scheduleId}}>
 
         @if ($errors->has('start_time_date'))
             @foreach ($errors->get('start_time_date') as $error)
