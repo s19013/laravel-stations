@@ -20,8 +20,10 @@
         </tr>
         @foreach ($movie->schedules as $schedule)
             <tr>
-                <td>{{date('H:i', strtotime($schedule->start_time));}}</td>
-                <td>{{date('H:i', strtotime($schedule->end_time));}}</td>
+                {{-- <td>{{date('H:i', strtotime($schedule->start_time));}}</td>
+                <td>{{date('H:i', strtotime($schedule->end_time));}}</td> --}}
+                <td>{{date('a h:i', strtotime($schedule->start_time));}}</td>
+                <td>{{date('a h:i', strtotime($schedule->end_time));}}</td>
             </tr>
         @endforeach
     </table>
