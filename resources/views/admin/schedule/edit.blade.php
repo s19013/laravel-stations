@@ -19,7 +19,7 @@
             @endforeach
         @endif
         <label for="">開始日付</label>
-        <input name='start_time_date' placeholder="例 2000-01-01" type="text" value="{{old('start_time_date')}}" required >
+        <input name='start_time_date' placeholder="例 2000-01-01" type="text" value="{{old('start_time_date',date('Y-m-d', strtotime($movieSchedule->start_time)))}}" required >
 
         <br>
 
@@ -39,7 +39,7 @@
             @endforeach
         @endif
         <label for="">終了日付</label>
-        <input name='end_time_date' placeholder="例 2000-01-01" type="text" value="{{old('end_time_date')}}" required >
+        <input name='end_time_date' placeholder="例 2000-01-01" type="text" value="{{old('start_time_date',date('Y-m-d', strtotime($movieSchedule->end_time)))}}" required >
 
         <br>
 
