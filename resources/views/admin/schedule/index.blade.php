@@ -41,6 +41,7 @@
                     <form action="/admin/schedules/{{$schedule->id}}/destroy" method="post" onsubmit="return finalCheck()">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="movie_id" value={{$movie->id}}>
                         <input type="submit" id='delete' value="削除">
                     </form>
                 </td>
