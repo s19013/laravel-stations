@@ -7,11 +7,12 @@
     <title>Practice</title>
 </head>
 <body>
-    <form action="/admin/schedules/{{$scheduleId}}/update" method="post">
+    <form action="/admin/schedules/{{$movieSchedule->id}}/update" method="post">
         @csrf
         @method("PATCH")
 
-        <input type="hidden" name="schedule_id" value={{$scheduleId}}>
+        {{-- <input type="hidden" name="schedule_id" value={{$movieSchedule->id}}> --}}
+        <input type="hidden" name="movie_id" value={{$movieSchedule->movie_id}}>
 
         @if ($errors->has('start_time_date'))
             @foreach ($errors->get('start_time_date') as $error)
