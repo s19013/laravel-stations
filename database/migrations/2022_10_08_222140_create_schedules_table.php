@@ -21,7 +21,8 @@ return new class extends Migration
             $table->timestamps();
 
             // 外部キー
-            $table->foreign('movie_id')->references('id')->on('movies');
+            // cascadeをつけたから紐づけた親要素のMovieが消えれば子要素のスケジュールも消える
+            $table->foreign('movie_id')->references('id')->on('movies')->cascadeOnDelete();;
         });
     }
 
