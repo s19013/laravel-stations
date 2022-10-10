@@ -46,7 +46,6 @@ class ScheduleRequest extends FormRequest
             'end_time_time'   => 'required|date_format:H:i',
         ];
 
-        if ($this->method()==="PATCH") { $baseRules["schedule_id"] = 'required'; }
         return $baseRules;
     }
 
@@ -54,7 +53,6 @@ class ScheduleRequest extends FormRequest
     {
         return [
             'movie_id.required' => 'idがない',
-            'schedule_id.required' => 'idがない',
             'start_time_date.required'    => '入力してください',
             'start_time_date.date_format' => '年-月-日の形式で入力してください',
             'start_time_time.required'    => '入力してください',
