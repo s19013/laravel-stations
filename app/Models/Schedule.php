@@ -55,10 +55,10 @@ class Schedule extends Model
         });
     }
 
-    public static function updateSchedule($request)
+    public static function updateSchedule($id,$request)
     {
-        DB::transaction(function () use($request){
-            Schedule::where('id','=',$request->schedule_id)
+        DB::transaction(function () use($id,$request){
+            Schedule::where('id','=',$id)
             ->update([
                 'start_time' => $request->start_time_date." ".$request->start_time_time,
                 'end_time'   => $request->end_time_date." ".$request->end_time_time,
@@ -71,40 +71,6 @@ class Schedule extends Model
         DB::transaction(function () use($id){
             Schedule::where('id', '=',$id)->delete();
         });
-    }
-
-    public static function search($request)
-    {
-        $searchToolKit = new searchToolKit();
-
-        // %と_をエスケープ
-        $escaped = $searchToolKit->sqlEscape($request->keyword);
-
-        //and検索のために空白区切りでつくった配列を用意
-        $wordListToSearch = $searchToolKit->preparationToAndSearch($escaped);
-
-        // 基本クエリ
-        $query = Schedule::select('*');
-
-        // キーワード追加
-        foreach($wordListToSearch as $word){
-            $query->where(function ($query) use ($word) {
-                // タイトルか概要のどちらかなのでOr
-                $query->where('title','like',"%$word%")
-                ->orWhere('description','like',"%$word%");
-            });
-        }
-
-        // () and 公開状態 という書き方のために上記
-
-        // 検索対象
-        // リクエストに送られるのはすべて""文字列""
-        if ($request->is_showing === '1') { $query->where('is_showing','=',1); }
-        //  == だとnullも0扱いになるので ===
-        if ($request->is_showing === '0') { $query->where('is_showing','=',0); }
-
-        // 取得
-        return $query->get();
     }
 
     public static function isExists($id)
