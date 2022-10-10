@@ -30,10 +30,8 @@
         </tr>
         @foreach ($movie->schedules as $schedule)
             <tr>
-                {{-- <td>{{date('H:i', strtotime($schedule->start_time));}}</td>
-                <td>{{date('H:i', strtotime($schedule->end_time));}}</td> --}}
-                <td>{{$schedule->start_time}}</td>
-                <td>{{$schedule->end_time}}</td>
+                <td>{{date('a h:i', strtotime($schedule->start_time));}}</td>
+                <td>{{date('a h:i', strtotime($schedule->end_time));}}</td>
                 <td>
                     <a href="/admin/schedules/{{$schedule->id}}/edit">
                         <button type="button">編集</button>
