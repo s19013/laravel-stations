@@ -30,8 +30,8 @@
         </tr>
         @foreach ($movie->schedules as $schedule)
             <tr>
-                <td>{{date('a h:i', strtotime($schedule->start_time));}}</td>
-                <td>{{date('a h:i', strtotime($schedule->end_time));}}</td>
+                <td>{{date('Y-m-d H:i:s', strtotime($schedule->start_time));}}</td>
+                <td>{{date('Y-m-d H:i:s', strtotime($schedule->end_time));}}</td>
                 <td>
                     <a href="/admin/schedules/{{$schedule->id}}/edit">
                         <button type="button">編集</button>
