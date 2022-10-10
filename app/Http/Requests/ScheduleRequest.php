@@ -39,13 +39,13 @@ class ScheduleRequest extends FormRequest
         // 2バイトトラップの処理とかあるけど今回はそういうの無視
 
         $baseRules = [
+            'movie_id' => 'required',
             'start_time_date' => 'required|date|date_format:Y-m-d',
             'start_time_time' => 'required|date_format:H:i',
             'end_time_date'   => 'required|date|date_format:Y-m-d',
             'end_time_time'   => 'required|date_format:H:i',
         ];
 
-        if ($this->method()==="POST") { $baseRules["movie_id"] = 'required'; }
         if ($this->method()==="PATCH") { $baseRules["schedule_id"] = 'required'; }
         return $baseRules;
     }
