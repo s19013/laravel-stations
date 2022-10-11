@@ -27,7 +27,7 @@
                 <td>{{date('a h:m', strtotime($schedule->end_time));}}</td>
                 <td>
                     <a href="/movies/{{$movie->id}}/schedules/{{$schedule->id}}/sheets?screening_date={{date('Y-m-d', strtotime($schedule->start_time))}}">
-                        <button type="button">座席を予約</button>
+                        <button type="button">座席を予約する</button>
                     </a>
                 </td>
             </tr>
