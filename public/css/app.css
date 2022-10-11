@@ -55,3 +55,13 @@ table.movieTable td {
 .movie img {
     width: 20rem;
 }
+
+.sheetTable {
+    overflow:auto;
+    /* width: 100%;
+    table-layout: fixed; */
+    border-collapse:  collapse;
+}
+table.sheetTable td{
+    border: solid 1px;
+}
