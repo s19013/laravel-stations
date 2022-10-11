@@ -9,7 +9,7 @@
 </head>
 <body>
     <p>{{$movie->title}}</p>
-    <img src="{{$movie->image_url}}" alt="">
+    <img width="300rem" src="{{$movie->image_url}}" alt="">
     <p>{{$movie->published_year}}</p>
     <p>{{$movie->description}}</p>
 

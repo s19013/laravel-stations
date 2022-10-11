@@ -10,7 +10,7 @@
 <body>
 
     <h2>{{$movie->title}}</h2>
-    <img src="{{$movie->image_url}}" alt="">
+    <img width="300rem" src="{{$movie->image_url}}" alt="">
     <p>{{$movie->published_year}}</p>
     <p>{{$movie->description}}</p>
     @if ($movie->is_showing === '1')
