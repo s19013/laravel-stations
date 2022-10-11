@@ -12,81 +12,21 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($movie_id,$schedule_id,Request $request)
     {
-        $rowA = Sheet::getRow("a");
-        $rowB = Sheet::getRow("b");
-        $rowC = Sheet::getRow("c");
+        // クエリがないなら400
+        if (empty($request->screening_date)) {
+             return response()->json([
+                "message" => "bad request",
+                "status"  => 400
+             ]);
+        }
+
         return view('sheet.index', [
-            'rowA' => $rowA,
-            'rowB' => $rowB,
-            'rowC' => $rowC,
+            "movie_id"       => $movie_id,
+            "schedule_id"    => $schedule_id,
+            "screening_date" => $request->screening_date,
+            "sheets" => Sheet::all()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sheet  $sheet
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sheet $sheet)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Sheet  $sheet
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sheet $sheet)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sheet  $sheet
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Sheet $sheet)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sheet  $sheet
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sheet $sheet)
-    {
-        //
     }
 }
