@@ -17,6 +17,7 @@
         <tr>
             <th>開始</th>
             <th>終了</th>
+            <th></th>
         </tr>
         @foreach ($movie->schedules as $schedule)
             <tr>
@@ -24,6 +25,11 @@
                 <td>{{date('H:i', strtotime($schedule->end_time));}}</td> --}}
                 <td>{{date('a h:m', strtotime($schedule->start_time));}}</td>
                 <td>{{date('a h:m', strtotime($schedule->end_time));}}</td>
+                <td>
+                    <a href="/movies/{{$movie->id}}/schedules/{{$schedule->id}}/sheets?screening_date={{date('Y-m-d', strtotime($schedule->start_time))}}">
+                        <button type="button">座席を予約</button>
+                    </a>
+                </td>
             </tr>
         @endforeach
     </table>
