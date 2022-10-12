@@ -25,6 +25,9 @@ return new class extends Migration
             // 外部
             $table->foreign('schedule_id')->references('id')->on('schedules')->cascadeOnDelete();
             $table->foreign('sheet_id')->references('id')->on('sheets');
+
+            // 複合ユニーク
+            $table->unique(['schedule_id', 'sheet_id']);
         });
     }
 
