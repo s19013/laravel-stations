@@ -17,15 +17,7 @@ class ScheduleRequest extends FormRequest
      */
     public function authorize()
     {
-        // 通信メソッドで制限
-        // 今回の仕様ではURLで制限をかけるのは難しいと判断
-        $validityList = [
-            'PATCH',
-            'POST'
-        ];
-
-        if (in_array($this->method(), $validityList )) { return true; }
-        return false;
+        return true;
     }
 
     /**
