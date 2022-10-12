@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 use App\Models\Movie;
 use App\Models\Sheet;
@@ -36,7 +37,7 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
         $this->validate($request,[
             'name'     =>'required|max:255',
