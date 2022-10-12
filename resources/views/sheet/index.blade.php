@@ -12,27 +12,6 @@
         <p>{{ session('message') }}</p>
     @endif
     <table class="sheetTable">
-        {{-- <tr>
-            @foreach ($rowA as $sheet)
-                <td>
-                    {{$sheet->row}}-{{$sheet->column}}
-                </td>
-            @endforeach
-        </tr>
-        <tr>
-            @foreach ($rowB as $sheet)
-                <td>
-                    {{$sheet->row}}-{{$sheet->column}}
-                </td>
-            @endforeach
-        </tr>
-        <tr>
-            @foreach ($rowC as $sheet)
-                <td>
-                    {{$sheet->row}}-{{$sheet->column}}
-                </td>
-            @endforeach
-        </tr> --}}
         @php $switchFlag = "a"; @endphp
 
         <tr>
@@ -44,11 +23,17 @@
                 @php $switchFlag = $sheet->row @endphp
             @endif
 
-            <td>
-                <a href="/movies/{{$movie_id}}/schedules/{{$schedule_id}}/reservations/create?screening_date={{$screening_date}}&sheetId={{$sheet->id}}">
+            @if (in_array($sheet->id,$reserved))
+                <td class="reserved">
                     {{$sheet->row}}-{{$sheet->column}}
-                </a>
-            </td>
+                </td>
+            @else
+                <td>
+                    <a href="/movies/{{$movie_id}}/schedules/{{$schedule_id}}/reservations/create?screening_date={{$screening_date}}&sheetId={{$sheet->id}}">
+                        {{$sheet->row}}-{{$sheet->column}}
+                    </a>
+                </td>
+            @endif
 
         @endforeach
         </tr>
