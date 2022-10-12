@@ -15,10 +15,7 @@ class ScheduleRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
-    }
+    public function authorize() { return true; }
 
     /**
      * Get the validation rules that apply to the request.
@@ -27,18 +24,13 @@ class ScheduleRequest extends FormRequest
      */
     public function rules()
     {
-        // そもそもなんでチェックボックスにこだわるんだよトグルとか､ラジオボタンで十分でしょ!!
-        // 2バイトトラップの処理とかあるけど今回はそういうの無視
-
-        $baseRules = [
+        return [
             'movie_id' => 'required',
             'start_time_date' => 'required|date|date_format:Y-m-d',
             'start_time_time' => 'required|date_format:H:i',
             'end_time_date'   => 'required|date|date_format:Y-m-d',
             'end_time_time'   => 'required|date_format:H:i',
         ];
-
-        return $baseRules;
     }
 
     public function messages()
