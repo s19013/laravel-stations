@@ -21,17 +21,18 @@
     </div>
     <div class="movies">
         @foreach ($movieList as $movie)
-            <div class="movie">
-                <p>{{$movie->id}}</p>
-                <p>タイトル: {{ $movie->title }}</p>
-                <img src={{$movie->image_url}} alt="">
-                @if ($movie->is_showing)
-                <p>上映中</p>
-                @endif
-                @if ($movie->is_showing == false)
-                <p>上映予定</p>
-                @endif
-            </div>
+            <a href="/movies/{{$movie->id}}">
+                <div class="movie">
+                    <p>タイトル: {{ $movie->title }}</p>
+                    <img src={{$movie->image_url}} alt="">
+                    @if ($movie->is_showing)
+                    <p>上映中</p>
+                    @endif
+                    @if ($movie->is_showing == false)
+                    <p>上映予定</p>
+                    @endif
+                </div>
+            </a>
         @endforeach
     </div>
 </body>
