@@ -26,8 +26,14 @@ class Schedule extends Model
     // 所属元を設定
     public function Movies()
     {
-       return $this->belongsTo('App\Models\Movie::class');
+       return $this->belongsTo('App\Models\Movie');
     }
+
+    public function Reservations()
+    {
+       return $this->belongsTo('App\Models\Reservation');
+    }
+
 
     public static function getScheduleData($id)
     {
