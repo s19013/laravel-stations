@@ -25,6 +25,7 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         return [
+            'movie_id' => 'required',
             'name'     =>'required|max:255',
             'email'    =>'required|max:255|email',
             "schedule_id" =>'required',
