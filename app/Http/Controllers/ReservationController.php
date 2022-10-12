@@ -25,7 +25,7 @@ class ReservationController extends Controller
     public function create($movie_id,$schedule_id,Request $request)
     {
         // クエリがないなら400
-        if (empty($request->screening_date) || empty($request->sheet_id)) {abort(400);}
+        if (empty($request->screening_date) || empty($request->sheetId)) {abort(400);}
 
         return view('movie.reservation', [
             "movie_id"       => $movie_id,
