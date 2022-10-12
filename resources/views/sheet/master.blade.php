@@ -9,27 +9,6 @@
 </head>
 <body>
     <table class="sheetTable">
-        {{-- <tr>
-            @foreach ($rowA as $sheet)
-                <td>
-                    {{$sheet->row}}-{{$sheet->column}}
-                </td>
-            @endforeach
-        </tr>
-        <tr>
-            @foreach ($rowB as $sheet)
-                <td>
-                    {{$sheet->row}}-{{$sheet->column}}
-                </td>
-            @endforeach
-        </tr>
-        <tr>
-            @foreach ($rowC as $sheet)
-                <td>
-                    {{$sheet->row}}-{{$sheet->column}}
-                </td>
-            @endforeach
-        </tr> --}}
         @php $switchFlag = "a"; @endphp
 
         <tr>
