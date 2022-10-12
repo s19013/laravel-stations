@@ -11,7 +11,7 @@
     @if (session('message'))
         <p>{{ session('message') }}</p>
     @endif
-    <a href="">
+    <a href="/admin/reservations/create">
         <button type="button">新規作成</button>
     </a>
     <pre>
