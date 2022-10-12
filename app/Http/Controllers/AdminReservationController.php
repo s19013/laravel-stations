@@ -29,6 +29,17 @@ class AdminReservationController extends Controller
 
     public function store(ReservationRequest $request)
     {
+        // すでに予約されてないか
+        if (Reservation::isAllReadyExist($request)) {
+            return redirect("/admin/reservations")->with([
+                "message"        => "そこはすでに予約されています",
+            ]);
+        }
 
+        Reservation::storeReservateion($request);
+
+        return redirect("/admin/reservations")->with([
+            'message'   => "予約した",
+        ]);
     }
 }
