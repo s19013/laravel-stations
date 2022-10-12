@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminMovieController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\SheetController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ReservationController;
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +35,13 @@ Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 Route::prefix('/movies')->group(function (){
     Route::get('/', [MovieController::class, 'index']);
     Route::get('/{id}', [ScheduleController::class, 'index']);
+
+    Route::get('/{movie_id}/schedules/{schedule_id}/sheets', [ReservationController::class, 'index']);
+
+    Route::get('/{movie_id}/schedules/{schedule_id}/reservations/create',[ReservationController::class,'create']);
 });
+
+Route::post('/reservations/store',[ReservationController::class,'store']);
 
 
 
@@ -52,7 +59,6 @@ Route::prefix('/admin/movies')->group(function (){
     Route::get('/{id}',[AdminScheduleController::class,'index']);
     Route::get('/{id}/schedules/create',[AdminScheduleController::class,'create']);
     Route::post('/{id}/schedules/store',[AdminScheduleController::class,'store']);
-
 
     // 定義してないやつらの扱い
     Route::fallback(function () {
