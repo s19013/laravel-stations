@@ -31,7 +31,7 @@ class ReservationController extends Controller
             "movie_id"       => $movie_id,
             "schedule_id"    => $schedule_id,
             "screening_date" => $request->screening_date,
-            "sheet_id"        => $request->sheet_id
+            "sheet_id"        => $request->sheetId
         ]);
     }
 
