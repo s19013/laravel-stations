@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 use App\Models\Movie;
 use App\Models\Sheet;
@@ -18,12 +19,15 @@ class AdminReservationController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        // クエリがないなら400
+        // if (empty($request->screening_date) || empty($request->sheetId)) {abort(400);}
 
+        return view('admin.reservation.create');
     }
 
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
 
     }
