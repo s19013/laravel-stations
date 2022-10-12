@@ -39,14 +39,6 @@ class ReservationController extends Controller
 
     public function store(ReservationRequest $request)
     {
-        $this->validate($request,[
-            'name'     =>'required|max:255',
-            'email'    =>'required|max:255|email',
-            "schedule_id" =>'required',
-            "screening_date" =>'required',
-            "sheet_id" =>'required',
-        ]);
-
         // すでに予約されてないか
         if (Reservation::isAllReadyExist($request)) {
             return redirect("/movies/{$request->movie_id}/schedules/{$request->schedule_id}/sheets?screening_date={$request->screening_date}")->with([
