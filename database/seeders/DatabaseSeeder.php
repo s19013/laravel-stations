@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Movie::factory(20)->create();
-        Schedule::factory(5)->create();
+        // Schedule::factory(5)->create();
         $this->call(SheetTableSeeder::class);
+
+        // 手順書になかったやつ､テストの時にはコメントアウト
+        $this->call(ReservationSeeder::class);
     }
 }
