@@ -77,4 +77,5 @@ Route::prefix('admin/schedules')->group(function (){
 Route::prefix('admin/reservations')->group(function (){
     Route::get('/',[AdminReservationController::class,'index']);
     Route::get('/create',[AdminReservationController::class,'create']);
+    Route::post('/store',[AdminReservationController::class,'store']);
 });
