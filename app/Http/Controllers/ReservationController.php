@@ -18,7 +18,8 @@ class ReservationController extends Controller
            "movie_id"       => $movie_id,
            "schedule_id"    => $schedule_id,
            "screening_date" => $request->screening_date,
-           "sheets" => Sheet::all()
+           "sheets"   => Sheet::all(),
+           "reserved" => Reservation::isAllreadyReserved($schedule_id)
        ]);
     }
 
