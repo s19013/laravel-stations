@@ -12,20 +12,9 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($movie_id,$schedule_id,Request $request)
+    public function index()
     {
-        // クエリがないなら400
-        if (empty($request->screening_date)) {
-             return response()->json([
-                "message" => "bad request",
-                "status"  => 400
-             ]);
-        }
-
-        return view('sheet.index', [
-            "movie_id"       => $movie_id,
-            "schedule_id"    => $schedule_id,
-            "screening_date" => $request->screening_date,
+        return view('sheet.master', [
             "sheets" => Sheet::all()
         ]);
     }
