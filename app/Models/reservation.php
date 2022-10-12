@@ -15,17 +15,29 @@ class Reservation extends Model
         'updated_at',
     ];
 
-    //hasMany設定
-    // リレーションシップ設定
-    public function Sheets()
+    //belongsTo設定
+    // 参照したいカラムがあるテーブル(モデル)を設定
+    public function allRelation()
     {
-        return $this->hasMany('App\Models\Sheet');
+       return $this->belongsTo('App\Models\Sheet','App\Models\Schedule');
     }
 
-    public function Schedules()
+    public function sheet()
     {
-        return $this->hasMany('App\Models\Schedule');
+       return $this->belongsTo('App\Models\Sheet');
     }
+
+    //hasMany設定
+    // リレーションシップ設定
+    // public function Sheets()
+    // {
+    //     return $this->hasMany('App\Models\Sheet');
+    // }
+
+    // public function Schedules()
+    // {
+    //     return $this->hasMany('App\Models\Schedule');
+    // }
 
     public static function storeReservateion($request)
     {
@@ -56,6 +68,13 @@ class Reservation extends Model
         foreach($returnValueList as $returnValue){ array_push($reservedSheetList,$returnValue->sheet_id); }
 
         return $reservedSheetList;
+    }
+
+    public static function getAllReservation($date)
+    {
+        return Reservation::join("sheets","sheets.id","=","reservations.sheet_id")
+        ->where("reservations.screening_date",">=",$date)
+        ->get();
     }
 }
 

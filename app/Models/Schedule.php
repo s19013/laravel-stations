@@ -22,16 +22,19 @@ class Schedule extends Model
         'end_time'
     ];
 
+    // リレーション
     //belongsTo設定
-    // 所属元を設定
+    // 参照したいカラムがあるテーブル(モデル)を設定
     public function Movies()
     {
        return $this->belongsTo('App\Models\Movie');
     }
 
+    // hasMany
+    // 自分のテーブルのカラムを参照しているテーブル(モデル)を設定
     public function Reservations()
     {
-       return $this->belongsTo('App\Models\Reservation');
+       return $this->hasMany('App\Models\Reservation');
     }
 
 
