@@ -24,7 +24,7 @@
 
 /*  */
 
-.movieTable{
+table {
     overflow:auto;
     width: 100%;
     table-layout: fixed;
@@ -32,6 +32,12 @@
     word-break   :break-word;
     overflow-wrap:normal;
 }
+
+td{
+    border: solid 1px;
+    margin:0.5rem 0;
+}
+
 table.movieTable img {
     width: 8rem;
     height: auto;
@@ -56,12 +62,6 @@ table.movieTable td {
     width: 20rem;
 }
 
-.sheetTable {
-    overflow:auto;
-    /* width: 100%;
-    table-layout: fixed; */
-    border-collapse:  collapse;
-}
 table.sheetTable td{
     border: solid 1px;
 }
