@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="\css\app.css">
 </head>
 <body>
+    @if (session('message'))
+        <p>{{ session('message') }}</p>
+    @endif
     <p>{{$movie->title}}</p>
     <img width="300rem" src="{{$movie->image_url}}" alt="">
     <p>{{$movie->published_year}}</p>

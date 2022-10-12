@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="\css\app.css">
 </head>
 <body>
+    @if (session('message'))
+        <p>{{ session('message') }}</p>
+    @endif
     <table class="sheetTable">
         {{-- <tr>
             @foreach ($rowA as $sheet)
