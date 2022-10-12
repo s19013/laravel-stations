@@ -14,7 +14,7 @@ class AdminReservationController extends Controller
     {
         // "reservationList" => Reservation::getAllReservation(CarbonImmutable::now())
         return view('admin.reservation.index', [
-            "reservationList" => Reservation::with('sheet')->where("reservations.screening_date",">=",new CarbonImmutable('2020-01-01'))->get()
+            "reservationList" => Reservation::with('sheet')->where("reservations.screening_date",">=",CarbonImmutable::now())->get()
         ]);
     }
 
