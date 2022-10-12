@@ -65,3 +65,7 @@ table.movieTable td {
 table.sheetTable td{
     border: solid 1px;
 }
+
+.reserved {
+    background-color: rgb(110, 110, 110);
+}
