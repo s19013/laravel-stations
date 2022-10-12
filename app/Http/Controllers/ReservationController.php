@@ -47,13 +47,6 @@ class ReservationController extends Controller
 
         // すでに予約されてないか
         if (Reservation::isAllReadyExist($request)) {
-            // return redirect("movies/{$request->movie_id}")->with([
-            //     "message"        => "そこはすでに予約されています",
-            //     "movie_id"       => $movie_id,
-            //     "schedule_id"    => $schedule_id,
-            //     "screening_date" => $request->screening_date,
-            //     "sheets" => Sheet::all()
-            // ]);
             return redirect("/movies/{$request->movie_id}/schedules/{$request->schedule_id}/sheets?screening_date={$request->screening_date}")->with([
                 "message"        => "そこはすでに予約されています",
                 "movie_id"       => $request->movie_id,
