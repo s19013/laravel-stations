@@ -29,6 +29,18 @@
             @endforeach
         </tr>
         <tr>
+            <td></td>
+            @foreach ($reservationList as $reservation)
+                <td>
+                    <form action="/admin/reservations/{{$reservation->id}}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return finalCheck()">削除</button>
+                    </form>
+                </td>
+            @endforeach
+        </tr>
+        <tr>
             <td>日付</td>
             @foreach ($reservationList as $reservation)
                 <td>{{$reservation->screening_date}}</td>
