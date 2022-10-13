@@ -21,8 +21,6 @@ class AdminReservationController extends Controller
 
     public function create(Request $request)
     {
-        // クエリがないなら400
-        // if (empty($request->screening_date) || empty($request->sheetId)) {abort(400);}
 
         return view('admin.reservation.create');
     }
@@ -44,7 +42,7 @@ class AdminReservationController extends Controller
             ]);
         }
 
-        Reservation::storeReservateion($request);
+        Reservation::storeReservation($request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "予約した",
@@ -69,13 +67,24 @@ class AdminReservationController extends Controller
         if (empty($request->name))  {abort(400);}
         if (empty($request->email)) {abort(400);}
 
-        Reservation::updateReservateion($reservation_id,$request);
+        Reservation::updateReservation($reservation_id,$request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "更新した",
         ]);
     }
 
+    public function destroy($reservation_id)
+    {
+        // 存在していなかったら400
+        if (!Reservation::isExist($reservation_id)) {abort(404);}
+
+        Reservation::deleteReservation($reservation_id);
+
+        return redirect("/admin/reservations")->with([
+            'message'   => "削除した",
+        ]);
+    }
 
 }
 
