@@ -70,6 +70,14 @@ class Reservation extends Model
         return $reservedSheetList;
     }
 
+    public static function getIdOfMovieReservated($reservation_id)
+    {
+        return Reservation::select('movies.id as movie_id')
+        ->join("schedules","schedules.id","=",'reservations.schedule_id')
+        ->join("movies","movies.id","=","schedules.movie_id")
+        ->first();
+    }
+
     public static function getAllReservation($date)
     {
         return Reservation::join("sheets","sheets.id","=","reservations.sheet_id")
