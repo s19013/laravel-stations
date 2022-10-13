@@ -39,6 +39,14 @@ class ReservationController extends Controller
 
     public function store(ReservationRequest $request)
     {
+        // クエリがないなら400
+        if (empty($request->screening_date)) {abort(400);}
+        if (empty($request->sheet_id)) {abort(400);}
+        if (empty($request->movie_id)) {abort(400);}
+        if (empty($request->schedule_id)) {abort(400);}
+        if (empty($request->name))  {abort(400);}
+        if (empty($request->email)) {abort(400);}
+
         // すでに予約されてないか
         if (Reservation::isAllReadyExist($request)) {
             return redirect("/movies/{$request->movie_id}/schedules/{$request->schedule_id}/sheets?screening_date={$request->screening_date}")->with([
