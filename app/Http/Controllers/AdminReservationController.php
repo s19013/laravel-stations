@@ -29,6 +29,14 @@ class AdminReservationController extends Controller
 
     public function store(ReservationRequest $request)
     {
+        // クエリがないなら400
+        if (empty($request->screening_date)) {abort(400);}
+        if (empty($request->sheet_id)) {abort(400);}
+        if (empty($request->movie_id)) {abort(400);}
+        if (empty($request->schedule_id)) {abort(400);}
+        if (empty($request->name))  {abort(400);}
+        if (empty($request->email)) {abort(400);}
+
         // すでに予約されてないか
         if (Reservation::isAllReadyExist($request)) {
             return redirect("/admin/reservations")->with([
@@ -42,4 +50,32 @@ class AdminReservationController extends Controller
             'message'   => "予約した",
         ]);
     }
+
+    public function edit($reservation_id)
+    {
+        return view('admin.reservation.edit',[
+            "reservation" => Reservation::find($reservation_id),
+            "movie_id"    => Reservation::getIdOfMovieReservated($reservation_id)
+        ]);
+    }
+
+    public function update($reservation_id,ReservationRequest $request)
+    {
+        // クエリがないなら400
+        if (empty($request->screening_date)) {abort(400);}
+        if (empty($request->sheet_id)) {abort(400);}
+        if (empty($request->movie_id)) {abort(400);}
+        if (empty($request->schedule_id)) {abort(400);}
+        if (empty($request->name))  {abort(400);}
+        if (empty($request->email)) {abort(400);}
+
+        Reservation::updateReservateion($reservation_id,$request);
+
+        return redirect("/admin/reservations")->with([
+            'message'   => "更新した",
+        ]);
+    }
+
+
 }
+
