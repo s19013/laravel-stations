@@ -15,7 +15,7 @@ class ReservationRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {return true; }
+    public function authorize() {return true;}
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,14 +24,20 @@ class ReservationRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'movie_id' => 'required',
+        // adminはmovie_idが必要
+        // ユーザは不要
+        $baseRule = [
             'name'     =>'required|max:255',
             'email'    =>'required|max:255|email',
             "schedule_id" =>'required',
             "screening_date" =>'required',
             "sheet_id" =>'required',
         ];
+
+
+        if (preg_match("/admin\/reservations/", $this->path())) { $baseRule['movie_id'] = 'required'; }
+
+        return $baseRule;
     }
 
     public function messages()
