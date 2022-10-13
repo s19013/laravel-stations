@@ -27,7 +27,7 @@ class Reservation extends Model
        return $this->belongsTo('App\Models\Sheet');
     }
 
-    public static function storeReservateion($request)
+    public static function storeReservation($request)
     {
         \DB::transaction(function () use($request){
             Reservation::create([
@@ -40,7 +40,7 @@ class Reservation extends Model
         });
     }
 
-    public static function updateReservateion($reservation_id,$request)
+    public static function updateReservation($reservation_id,$request)
     {
         \DB::transaction(function () use($reservation_id,$request){
             Reservation::where('id','=',$reservation_id)
@@ -52,6 +52,19 @@ class Reservation extends Model
                 "name"     => $request->name,
             ]);
         });
+    }
+
+    public static function deleteReservation($reservation_id)
+    {
+        \DB::transaction(function () use($reservation_id){
+            Reservation::where('id','=',$reservation_id)
+            ->delete();
+        });
+    }
+
+    public static function isExist($reservation_id)
+    {
+        return Reservation::where('id','=',$reservation_id)->exists();
     }
 
     public static function isAllReadyExist($request)
