@@ -27,22 +27,24 @@ class Reservation extends Model
        return $this->belongsTo('App\Models\Sheet');
     }
 
-    //hasMany設定
-    // リレーションシップ設定
-    // public function Sheets()
-    // {
-    //     return $this->hasMany('App\Models\Sheet');
-    // }
-
-    // public function Schedules()
-    // {
-    //     return $this->hasMany('App\Models\Schedule');
-    // }
-
     public static function storeReservateion($request)
     {
         \DB::transaction(function () use($request){
             Reservation::create([
+                "screening_date" => $request->screening_date,
+                "schedule_id"    => $request->schedule_id,
+                "sheet_id" => $request->sheet_id,
+                "email"    => $request->email,
+                "name"     => $request->name,
+            ]);
+        });
+    }
+
+    public static function updateReservateion($reservation_id,$request)
+    {
+        \DB::transaction(function () use($reservation_id,$request){
+            Reservation::where('id','=',$reservation_id)
+            ->update([
                 "screening_date" => $request->screening_date,
                 "schedule_id"    => $request->schedule_id,
                 "sheet_id" => $request->sheet_id,
