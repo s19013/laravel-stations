@@ -22,7 +22,7 @@
             <td></td>
             @foreach ($reservationList as $reservation)
                 <td>
-                    <a href="/admin/reservations/{{$reservation->id}}">
+                    <a href="/admin/reservations/{{$reservation->id}}/edit">
                         <button type="button">編集</button>
                     </a>
                 </td>
@@ -32,7 +32,7 @@
             <td></td>
             @foreach ($reservationList as $reservation)
                 <td>
-                    <form action="/admin/reservations/{{$reservation->id}}">
+                    <form action="/admin/reservations/{{$reservation->id}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return finalCheck()">削除</button>
