@@ -62,15 +62,15 @@ class Reservation extends Model
         });
     }
 
-    public static function isExist($reservation_id)
+    public static function isDeleted($reservation_id)
     {
-        return Reservation::where('id','=',$reservation_id)->exists();
+        return !(Reservation::where('id','=',$reservation_id)->exists());
     }
 
-    public static function isAllReadyExist($request)
+    public static function isAllReadyExist($sheet_id,$schedule_id)
     {
-        return Reservation::where("schedule_id","=",$request->schedule_id)
-        ->where("sheet_id","=",$request->sheet_id)
+        return Reservation::where("schedule_id","=",$schedule_id)
+        ->where("sheet_id","=",$sheet_id)
         ->exists();
     }
 
