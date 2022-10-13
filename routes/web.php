@@ -78,4 +78,7 @@ Route::prefix('admin/reservations')->group(function (){
     Route::get('/',[AdminReservationController::class,'index']);
     Route::get('/create',[AdminReservationController::class,'create']);
     Route::post('/store',[AdminReservationController::class,'store']);
+    Route::get('/{reservation_id}',[AdminReservationController::class,'edit']);
+    Route::patch('/{reservation_id}',[AdminReservationController::class,'update']);
+    Route::delete('/{reservation_id}',[AdminReservationController::class,'destroy']);
 });
