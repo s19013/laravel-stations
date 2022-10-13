@@ -15,13 +15,13 @@ class AdminReservationController extends Controller
     {
         // "reservationList" => Reservation::getAllReservation(CarbonImmutable::now())
         return view('admin.reservation.index', [
+            // こういうwith使ったやつも関数かしてモデルファイルにおいて置くべきなのだろうか?
             "reservationList" => Reservation::with('sheet')->where("reservations.screening_date",">=",CarbonImmutable::now())->get()
         ]);
     }
 
     public function create(Request $request)
     {
-
         return view('admin.reservation.create');
     }
 
@@ -36,7 +36,7 @@ class AdminReservationController extends Controller
         if (empty($request->email)) {abort(400);}
 
         // すでに予約されてないか
-        if (Reservation::isAllReadyExist($request)) {
+        if (Reservation::isAllReadyExist($request->sheet_id,$request->schdule_id)) {
             return redirect("/admin/reservations")->with([
                 "message"        => "そこはすでに予約されています",
             ]);
@@ -77,7 +77,7 @@ class AdminReservationController extends Controller
     public function destroy($reservation_id)
     {
         // 存在していなかったら400
-        if (!Reservation::isExist($reservation_id)) {abort(404);}
+        if (Reservation::isDeleted($reservation_id)) {abort(404);}
 
         Reservation::deleteReservation($reservation_id);
 
