@@ -19,6 +19,16 @@
     </pre>
     <table class="reservationTable">
         <tr>
+            <td></td>
+            @foreach ($reservationList as $reservation)
+                <td>
+                    <a href="/admin/reservations/{{$reservation->id}}">
+                        <button type="button">編集</button>
+                    </a>
+                </td>
+            @endforeach
+        </tr>
+        <tr>
             <td>日付</td>
             @foreach ($reservationList as $reservation)
                 <td>{{$reservation->screening_date}}</td>
