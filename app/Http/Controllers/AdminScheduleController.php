@@ -17,10 +17,7 @@ class AdminScheduleController extends Controller
      */
     public function index($id)
     {
-        // "data" => Movie::find($id)
         return view('admin.schedule.index', [
-            // 'movieScheduleList' => Schedule::getScheduleData($id),
-            // 'movieData'         => Movie::getSingleMovieData($id)
             'movie' => Movie::with('schedules')->find($id)
         ]);
     }
@@ -45,7 +42,7 @@ class AdminScheduleController extends Controller
 
     public function edit($id) {
         return view('admin.schedule.edit')->with([
-            'movieSchedule' => Schedule::getSingleScheduleData($id),
+            'movieSchedule' => Schedule::find($id),
         ]);
     }
 
