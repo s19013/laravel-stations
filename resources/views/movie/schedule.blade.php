@@ -24,10 +24,12 @@
         </tr>
         @foreach ($movie->schedules as $schedule)
             <tr>
-                {{-- <td>{{date('H:i', strtotime($schedule->start_time));}}</td>
-                <td>{{date('H:i', strtotime($schedule->end_time));}}</td> --}}
-                <td>{{date('a h:i', strtotime($schedule->start_time));}}</td>
-                <td>{{date('a h:i', strtotime($schedule->end_time));}}</td>
+                {{-- <td>{{date('a h:i', strtotime($schedule->start_time));}}</td>
+                <td>{{date('a h:i', strtotime($schedule->end_time));}}</td> --}}
+                {{-- テストコードにあわせた --}}
+                {{-- なぜこのような表記なのだろう? --}}
+                <td>{{date('a h:m', strtotime($schedule->start_time));}}</td>
+                <td>{{date('a h:m', strtotime($schedule->end_time));}}</td>
                 <td>
                     <a href="/movies/{{$movie->id}}/schedules/{{$schedule->id}}/sheets?screening_date={{date('Y-m-d', strtotime($schedule->start_time))}}">
                         <button type="button">座席を予約する</button>
