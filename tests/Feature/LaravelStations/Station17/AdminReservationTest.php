@@ -29,7 +29,7 @@ class AdminReservationTest extends TestCase
         for ($i = 0; $i < $count; $i++) {
             $movieId = $this->createMovie('タイトル'.$i)->id;
             Reservation::insert([
-                'date' => new CarbonImmutable('2050-01-01'),
+                'screening_date' => new CarbonImmutable('2050-01-01'),
                 'schedule_id' => Schedule::insertGetId([
                     'movie_id' => $movieId,
                     'start_time' => new CarbonImmutable('2050-01-01 00:00:00'),
@@ -45,7 +45,7 @@ class AdminReservationTest extends TestCase
 
         $reservations = Reservation::all();
         foreach ($reservations as $reservation) {
-            $response->assertSee($reservation->date);
+            $response->assertSee($reservation->screening_date);
             $response->assertSee($reservation->name);
             $response->assertSee($reservation->email);
             $response->assertSee(strtoupper($reservation->sheet->row.$reservation->sheet->column));
@@ -61,7 +61,7 @@ class AdminReservationTest extends TestCase
         for ($i = 0; $i < $count; $i++) {
             $movieId = $this->createMovie('タイトル'.$i)->id;
             Reservation::insert([
-                'date' => new CarbonImmutable('2020-01-01'),
+                'screening_date' => new CarbonImmutable('2020-01-01'),
                 'schedule_id' => Schedule::insertGetId([
                     'movie_id' => $movieId,
                     'start_time' => new CarbonImmutable('2020-01-01 00:00:00'),
@@ -77,7 +77,7 @@ class AdminReservationTest extends TestCase
 
         $reservations = Reservation::all();
         foreach ($reservations as $reservation) {
-            $response->assertDontSee($reservation->date);
+            $response->assertDontSee($reservation->screening_date);
             $response->assertDontSee($reservation->name);
             $response->assertDontSee($reservation->email);
             $response->assertDontSee(strtoupper($reservation->sheet->row.$reservation->sheet->column));
@@ -102,8 +102,11 @@ class AdminReservationTest extends TestCase
         $movieId = $this->createMovie('タイトル')->id;
         $scheduleId = $this->createSchedule($movieId)->id;
 
-        $response = $this->post('/admin/reservations', [
+        // 仕様書では /admin/reservations/storeなんだけど
+        $response = $this->post('/admin/reservations/store', [
             'movie_id' => $movieId,
+            // なぜscreening_dateがないのか
+            'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
             'name' => 'サンプル太郎',
@@ -119,7 +122,7 @@ class AdminReservationTest extends TestCase
     public function testRequiredバリデーションが設定されているか(): void
     {
         $this->assertReservationCount(0);
-        $response = $this->post('/admin/reservations', [
+        $response = $this->post('/admin/reservations/store', [
             'movie_id' => null,
             'schedule_id' => null,
             'sheet_id' => null,
@@ -145,7 +148,7 @@ class AdminReservationTest extends TestCase
         $movieId = $this->createMovie('タイトル')->id;
         $scheduleId = $this->createSchedule($movieId)->id;
         $reservationId = Reservation::insertGetId([
-            'date' => new CarbonImmutable(),
+            'screening_date' => new CarbonImmutable(),
             'schedule_id' => $scheduleId,
             'sheet_id' => 1,
             'email' => 'sample@exmaple.com',
@@ -163,7 +166,7 @@ class AdminReservationTest extends TestCase
         $movieId = $this->createMovie('タイトル')->id;
         $scheduleId = $this->createSchedule($movieId)->id;
         $reservationId = Reservation::insertGetId([
-            'date' => new CarbonImmutable(),
+            'screening_date' => new CarbonImmutable(),
             'schedule_id' => $scheduleId,
             'sheet_id' => 1,
             'email' => 'sample@exmaple.com',
@@ -173,6 +176,8 @@ class AdminReservationTest extends TestCase
             'movie_id' => $movieId,
             'schedule_id' => $scheduleId,
             'sheet_id' => 2,
+            // screening_dateがないので追加
+            'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
             'name' => 'サン太郎',
             'email' => 'sample@techbowl.com',
         ]);
@@ -191,7 +196,7 @@ class AdminReservationTest extends TestCase
         $movieId = $this->createMovie('タイトル')->id;
         $scheduleId = $this->createSchedule($movieId)->id;
         $reservationId = Reservation::insertGetId([
-            'date' => new CarbonImmutable(),
+            'screening_date' => new CarbonImmutable(),
             'schedule_id' => $scheduleId,
             'sheet_id' => 1,
             'email' => 'sample@exmaple.com',
@@ -238,7 +243,7 @@ class AdminReservationTest extends TestCase
         $movieId = $this->createMovie('タイトル')->id;
         $scheduleId = $this->createSchedule($movieId)->id;
         $reservationId = Reservation::insertGetId([
-            'date' => new CarbonImmutable(),
+            'screening_date' => new CarbonImmutable(),
             'schedule_id' => $scheduleId,
             'sheet_id' => 1,
             'email' => 'sample@exmaple.com',
