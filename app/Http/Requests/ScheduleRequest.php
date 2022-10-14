@@ -26,7 +26,7 @@ class ScheduleRequest extends FormRequest
     {
         return [
             'movie_id'  => 'required',
-            'screen_id' => 'required|max:3',
+            'screen_id' => 'required|numeric|max:3|min:1',
             'start_time_date' => 'required|date|date_format:Y-m-d',
             'start_time_time' => 'required|date_format:H:i',
             'end_time_date'   => 'required|date|date_format:Y-m-d',
@@ -39,7 +39,9 @@ class ScheduleRequest extends FormRequest
         return [
             'movie_id.required'  => 'idがない',
             'screen_id.required' => '入力してください',
+            'screen_id.numeric'  => '数値を入力してください',
             'screen_id.max'      => '最大値は3までです',
+            'screen_id.min'      => '最小値は1までです',
             'start_time_date.required'    => '入力してください',
             'start_time_date.date_format' => '年-月-日の形式で入力してください',
             'start_time_time.required'    => '入力してください',
