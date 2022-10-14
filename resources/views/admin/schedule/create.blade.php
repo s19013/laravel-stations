@@ -49,6 +49,16 @@
         <label for="">終了時間</label>
         <input name='end_time_time' placeholder="例 08:06" type="text" value="{{old('end_time_time')}}" required >
 
+        <br>
+
+        @if ($errors->has('screen_id'))
+            @foreach ($errors->get('screen_id') as $error)
+                <p>{{$error}}</p>
+            @endforeach
+        @endif
+        <label for="">スクリーン</label>
+        <input name='screen_id' type="number" value="{{old('screen_id')}}" required >
+
         <input type="submit" value="送信">
     </form>
 

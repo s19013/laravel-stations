@@ -25,6 +25,7 @@
         <tr>
             <th>開始</th>
             <th>終了</th>
+            <th>スクリーン</th>
             <th></th>
             <th></th>
         </tr>
@@ -32,6 +33,7 @@
             <tr>
                 <td>{{date('Y-m-d H:i:s', strtotime($schedule->start_time));}}</td>
                 <td>{{date('Y-m-d H:i:s', strtotime($schedule->end_time));}}</td>
+                <td>{{$schedule->screen_id}}</td>
                 <td>
                     <a href="/admin/schedules/{{$schedule->id}}/edit">
                         <button type="button">編集</button>
