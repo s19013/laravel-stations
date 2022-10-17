@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\LaravelStations\Station17;
+namespace Tests\Feature\LaravelStations\Station18;
 
 use App\Models\Movie;
 use App\Models\Schedule;
