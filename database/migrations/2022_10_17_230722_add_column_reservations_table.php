@@ -17,10 +17,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-
-            // 外部
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            // 最初だけnullable
+            $table->unsignedBigInteger('user_id')->nullable();
         });
 
         // usersテーブルを参照して値を入れる
@@ -31,6 +29,12 @@ return new class extends Migration
             ->where('email','=',$user->email)
             ->update(['user_id' => $user->id]);
         }
+
+        // 外部は後から追加
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable(false)->change();
+        });
     }
 
     /**
