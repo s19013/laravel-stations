@@ -1,0 +1,78 @@
+.bg-navbar {
+    background-color: #6590ee;
+}
+
+.navbar-light .navbar-brand {
+    color: #fff;
+}
+
+.movie-card {
+    width: 18rem;
+    margin: 10px 5px;
+}
+
+.required:after{
+    content:'*';
+    color:rgb(247, 100, 100);
+}
+
+.show-description {
+    height: 70%;
+    background-color: lightgray;
+    padding: 1rem;
+}
+
+/*  */
+
+table {
+    overflow:auto;
+    /* width: 100%; */
+    table-layout: fixed;
+    border-collapse:  collapse;
+    word-break   :break-word;
+    overflow-wrap:normal;
+}
+
+td{
+    border: solid 1px;
+    padding:0.2rem;
+}
+
+table.movieTable img {
+    width: 8rem;
+    height: auto;
+    }
+table.movieTable td {
+    width: 10rem;
+    border: solid 1px;
+    margin:0.5rem 0;
+}
+
+.movies {
+    display: flex;
+    flex-wrap :wrap;
+}
+
+.movies a{
+    text-decoration: none;
+    color: black;
+}
+
+.movie{
+    width: 20rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: solid 1px;
+}
+
+.movie img {
+    width: 20rem;
+}
+
+table.sheetTable td{
+    border: solid 1px;
+}
+
+.reserved {
+    background-color: rgb(110, 110, 110);
+}
