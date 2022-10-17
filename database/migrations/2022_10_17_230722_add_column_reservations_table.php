@@ -20,6 +20,9 @@ return new class extends Migration
             // 外部
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
+
+        // usersテーブルを参照して値を入れる
+
     }
 
     /**
