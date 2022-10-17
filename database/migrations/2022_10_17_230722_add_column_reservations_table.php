@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::table('reservations', function (Blueprint $table) {
             // 最初だけnullable
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable()->after("sheet_id");
         });
 
         // usersテーブルを参照して値を入れる
