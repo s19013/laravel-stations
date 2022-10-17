@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
+        Schema::table('reservations', function (Blueprint $table) {
+            // 生成時のみnullableにする(じゃないとエラー吐かれる)
+            $table->unsignedBigInteger('user_id')->nullable();
 
             // 外部
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
@@ -28,6 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        $table->dropColumn('user_id');
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 };
