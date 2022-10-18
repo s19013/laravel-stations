@@ -17,14 +17,14 @@ class Reservation extends Model
 
     //belongsTo設定
     // 参照したいカラムがあるテーブル(モデル)を設定
-    public function allRelation()
-    {
-       return $this->belongsTo('App\Models\Sheet','App\Models\Schedule');
-    }
-
     public function sheet()
     {
        return $this->belongsTo('App\Models\Sheet');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
     public static function storeReservation($request)

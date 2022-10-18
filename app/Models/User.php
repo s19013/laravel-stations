@@ -41,4 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // hasMany
+    // 自分のテーブルのカラムを参照しているテーブル(モデル)を設定
+    public function Reservations()
+    {
+       return $this->hasMany('App\Models\Reservation');
+    }
 }
