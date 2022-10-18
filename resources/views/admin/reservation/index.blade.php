@@ -49,13 +49,13 @@
         <tr>
             <td>予約者の名前</td>
             @foreach ($reservationList as $reservation)
-                <td>{{$reservation->name}}</td>
+                <td>{{$reservation->user->name}}</td>
             @endforeach
         </tr>
         <tr>
             <td>予約者のメアド</td>
             @foreach ($reservationList as $reservation)
-                <td>{{$reservation->email}}</td>
+                <td>{{$reservation->user->email}}</td>
             @endforeach
         </tr>
         <tr>
