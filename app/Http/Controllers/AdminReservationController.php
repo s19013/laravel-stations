@@ -35,8 +35,7 @@ class AdminReservationController extends Controller
         if (empty($request->sheet_id)) {abort(400);}
         if (empty($request->movie_id)) {abort(400);}
         if (empty($request->schedule_id)) {abort(400);}
-        if (empty($request->name))  {abort(400);}
-        if (empty($request->email)) {abort(400);}
+        if (empty($request->user_id)) {abort(400);}
 
         // すでに予約されてないか
         if (Reservation::isAllReadyExist($request->sheet_id,$request->schdule_id)) {
@@ -67,8 +66,7 @@ class AdminReservationController extends Controller
         if (empty($request->sheet_id)) {abort(400);}
         if (empty($request->movie_id)) {abort(400);}
         if (empty($request->schedule_id)) {abort(400);}
-        if (empty($request->name))  {abort(400);}
-        if (empty($request->email)) {abort(400);}
+        if (empty($request->user_id)) {abort(400);}
 
         Reservation::updateReservation($reservation_id,$request);
 
