@@ -21,7 +21,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者予約一覧が表示されているか(): void
     {
@@ -54,7 +54,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者予約一覧で上映終了の映画が非表示となっているか(): void
     {
@@ -87,7 +87,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者予約作成画面が表示されているか(): void
     {
@@ -96,7 +96,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者予約作成画面で予約が作成されるか(): void
     {
@@ -119,7 +119,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function testRequiredバリデーションが設定されているか(): void
     {
@@ -143,7 +143,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者映集予約画面が表示されているか(): void
     {
@@ -161,7 +161,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者予約編集画面で映画予約が更新されるか(): void
     {
@@ -191,7 +191,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test更新時Requiredバリデーションが設定されているか(): void
     {
@@ -239,7 +239,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test予約を削除できるか(): void
     {
@@ -259,7 +259,7 @@ class AdminReservationTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test削除対象が存在しない時404が返るか(): void
     {

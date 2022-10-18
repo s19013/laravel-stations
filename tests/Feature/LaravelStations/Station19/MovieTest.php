@@ -11,7 +11,7 @@ class MovieTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画一覧に全ての映画のタイトル、画像URLが表示されているか(): void
     {
@@ -35,7 +35,7 @@ class MovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画一覧で検索ができるか(): void
     {

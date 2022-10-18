@@ -11,7 +11,7 @@ class AdminMovieTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者映画一覧に全ての映画のカラムが表示されているか(): void
     {
@@ -44,7 +44,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者映画作成画面が表示されているか(): void
     {
@@ -53,7 +53,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者映画作成画面で映画が作成されるか(): void
     {
@@ -70,7 +70,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function testRequiredバリデーションが設定されているか(): void
     {
@@ -88,7 +88,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test画像URLバリデーションが設定されているか(): void
     {
@@ -106,7 +106,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画タイトルの重複バリデーションが設定されているか(): void
     {
@@ -137,7 +137,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者映画編集画面が表示されているか(): void
     {
@@ -152,7 +152,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test管理者映画編集画面で映画が更新されるか(): void
     {
@@ -175,7 +175,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test更新時Requiredバリデーションが設定されているか(): void
     {
@@ -193,7 +193,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test更新時画像URLバリデーションが設定されているか(): void
     {
@@ -211,7 +211,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test更新時映画タイトルの重複バリデーションが設定されているか(): void
     {
@@ -236,7 +236,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function testテーブルにMovieTitleのユニークキーが入っているか(): void
     {
@@ -275,7 +275,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画を削除できるか(): void
     {
@@ -287,7 +287,7 @@ class AdminMovieTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test削除対象が存在しない時404が返るか(): void
     {

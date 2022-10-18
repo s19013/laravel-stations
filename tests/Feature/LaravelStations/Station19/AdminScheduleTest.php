@@ -13,7 +13,7 @@ class AdminScheduleTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test管理者映画詳細にスケジュール一覧が表示されているか(): void
     {
@@ -53,7 +53,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test管理者映画スケジュール作成画面が表示されているか(): void
     {
@@ -63,7 +63,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test管理者映画スケジュール作成画面でスケジュールが作成されるか(): void
     {
@@ -82,7 +82,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function testRequiredバリデーションが設定されているか(): void
     {
@@ -102,7 +102,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test日時フォーマットのバリデーションが設定されているか(): void
     {
@@ -122,7 +122,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function testMaxフォーマットのバリデーションが設定されているか(): void
     {
@@ -142,7 +142,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function testMinフォーマットのバリデーションが設定されているか(): void
     {
@@ -162,7 +162,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function testNumericフォーマットのバリデーションが設定されているか(): void
     {
@@ -188,7 +188,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test管理者映画編スケジュール集画面が表示されているか(): void
     {
@@ -204,7 +204,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test管理者映画スケジュール編集画面で映画スケジュールが更新されるか(): void
     {
@@ -233,7 +233,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test更新時Requiredバリデーションが設定されているか(): void
     {
@@ -259,7 +259,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test更新時日時フォーマットのバリデーションが設定されているか(): void
     {
@@ -285,7 +285,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test更新時minのバリデーションが設定されているか(): void
     {
@@ -311,7 +311,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test更新時Numericのバリデーションが設定されているか(): void
     {
@@ -350,7 +350,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function testスケジュールを削除できるか(): void
     {
@@ -370,7 +370,7 @@ class AdminScheduleTest extends TestCase
     }
 
     /**
-     * @group station18
+     * @group station19
      */
     public function test削除対象が存在しない時404が返るか(): void
     {

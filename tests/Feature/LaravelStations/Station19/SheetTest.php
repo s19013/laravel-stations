@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\Reservation;
 use App\Models\Schedule;
 use App\Models\Sheet;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -21,7 +22,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function testSeedコマンドでマスターデータが作成されるか(): void
     {
@@ -29,7 +30,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test座席一覧画面に全ての座席が表示されるか(): void
     {
@@ -42,17 +43,21 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
-    public function test座席予約画面が表示されるか(): void
+    // 条件
+    // ログインしている状態
+    public function test座席予約画面が表示されるか_ログイン中(): void
     {
+        $user = User::factory()->create();
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
-        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets?screening_date='.CarbonImmutable::now()->format('Y-m-d'));
+        $response = $this->actingAs($user)
+        ->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets?screening_date='.CarbonImmutable::now()->format('Y-m-d'));
         $response->assertStatus(200);
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test座席予約画面がエラー時400を返すか(): void
     {
@@ -62,7 +67,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     // public function test予約ページが表示されるか(): void
     // {
@@ -72,7 +77,7 @@ class SheetTest extends TestCase
     // }
 
     /**
-     * @group station17
+     * @group station19
      */
     // public function test予約ページがエラー時400を返すか(): void
     // {
@@ -86,7 +91,7 @@ class SheetTest extends TestCase
     // }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test予約を保存できるかどうか(): void
     {
@@ -104,7 +109,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test予約のバリデーションチェック(): void
     {
@@ -123,7 +128,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test予約重複時時エラーを返す(): void
     {
@@ -148,7 +153,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function testDBのUnique制限がかかっているかどうか(): void
     {
@@ -177,7 +182,7 @@ class SheetTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     // public function test既に存在する予約の場合予約ページが400となるか(): void
     // {

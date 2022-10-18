@@ -13,7 +13,7 @@ class ScheduleTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画詳細ページが表示されるか(): void
     {
@@ -27,7 +27,7 @@ class ScheduleTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画スケジュールのリレーションが存在する(): void
     {
@@ -39,7 +39,7 @@ class ScheduleTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画詳細ページに紐づくスケジュールが表示されているか(): void
     {
@@ -57,7 +57,7 @@ class ScheduleTest extends TestCase
     }
 
     /**
-     * @group station17
+     * @group station19
      */
     public function test映画詳細ページに座席を予約するボタンが表示されているか(): void
     {
