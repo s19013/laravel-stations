@@ -9,6 +9,9 @@ use App\Models\Movie;
 use App\Models\Sheet;
 use Carbon\CarbonImmutable;
 
+use App\Models\User;
+
+
 class AdminReservationController extends Controller
 {
     public function index()
@@ -16,7 +19,7 @@ class AdminReservationController extends Controller
         // "reservationList" => Reservation::getAllReservation(CarbonImmutable::now())
         return view('admin.reservation.index', [
             // こういうwith使ったやつも関数かしてモデルファイルにおいて置くべきなのだろうか?
-            "reservationList" => Reservation::with('sheet')->where("reservations.screening_date",">=",CarbonImmutable::now())->get()
+            "reservationList" => Reservation::with('sheet')->with('user')->where("reservations.screening_date",">=",CarbonImmutable::now())->get()
         ]);
     }
 
