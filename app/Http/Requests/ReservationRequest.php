@@ -30,7 +30,7 @@ class ReservationRequest extends FormRequest
             "schedule_id" =>'required',
             "screening_date" =>'required|date|date_format:Y-m-d',
             "sheet_id" =>'required',
-            // "user_id" =>'required',
+            "user_id" =>'required',
         ];
 
 
@@ -46,7 +46,7 @@ class ReservationRequest extends FormRequest
             "screening_date.required" => "入力してください",
             "screening_date.date_format" => "年-月-日形式で入力してください",
             "sheet_id.required" => "入力してください",
-            // "user_id.required" => "入力してください",
+            "user_id.required" => "入力してください",
         ];
     }
 }
