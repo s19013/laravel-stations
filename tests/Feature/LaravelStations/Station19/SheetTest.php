@@ -112,13 +112,14 @@ class SheetTest extends TestCase
      */
     public function test予約を保存できるかどうか(): void
     {
+        $user = User::factory()->create();
         $this->assertReservationCount(0);
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
-        $response = $this->post('/reservations/store', [
+        $response = $this->actingAs($user)
+        ->post('/reservations/store', [
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
-            'name' => '予約者氏名',
-            'email' => "techbowl@techbowl.com",
+            'user_id'  => $user->id,
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $response->assertStatus(302);
@@ -128,19 +129,18 @@ class SheetTest extends TestCase
     /**
      * @group station19
      */
-    public function test予約のバリデーションチェック(): void
+    public function test予約のrequireバリデーションチェック(): void
     {
         $this->assertReservationCount(0);
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
         $response = $this->post('/reservations/store', [
             'schedule_id' => null,
             'sheet_id' => null,
-            'name' => null,
-            'email' => "techbowl@",
+            'user_id' => null,
             'screening_date' => null,
         ]);
         $response->assertStatus(302);
-        $response->assertInvalid(['schedule_id', 'sheet_id', 'name', 'email', 'screening_date']);
+        $response->assertInvalid(['schedule_id', 'sheet_id', 'user_id', 'screening_date']);
         $this->assertReservationCount(0);
     }
 
@@ -149,20 +149,22 @@ class SheetTest extends TestCase
      */
     public function test予約重複時時エラーを返す(): void
     {
+        $user = User::factory()->create();
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
         Reservation::insert([
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
-            'name' => '予約者氏名',
-            'email' => "techbowl@techbowl.com",
+            'user_id'  => $user->id,
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $this->assertReservationCount(1);
-        $response = $this->post('/reservations/store', [
+
+        $anotherUser = User::factory()->create();
+        $response = $this->actingAs($anotherUser)
+        ->post('/reservations/store', [
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
-            'name' => '予約者氏名',
-            'email' => "techbowl@techbowl.com",
+            'user_id'  => $anotherUser->id,
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $response->assertStatus(302);
@@ -174,12 +176,12 @@ class SheetTest extends TestCase
      */
     public function testDBのUnique制限がかかっているかどうか(): void
     {
+        $user = User::factory()->create();
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
         Reservation::insert([
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
-            'name' => '予約者氏名',
-            'email' => "techbowl@techbowl.com",
+            'user_id'  => $user->id,
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $this->assertReservationCount(1);
@@ -187,8 +189,7 @@ class SheetTest extends TestCase
             Reservation::insert([
                 'schedule_id' => $scheduleId,
                 'sheet_id' => Sheet::first()->id,
-                'name' => '予約者氏名',
-                'email' => "techbowl@techbowl.com",
+                'user_id'  => $user->id,
                 'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
             ]);
             $this->fail();
