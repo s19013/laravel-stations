@@ -29,9 +29,16 @@
                 </td>
             @else
                 <td>
-                    <a href="/movies/{{$movie_id}}/schedules/{{$schedule_id}}/reservations/create?screening_date={{$screening_date}}&sheetId={{$sheet->id}}">
-                        {{$sheet->row}}-{{$sheet->column}}
-                    </a>
+                    <form action="/reservations/store" method="post">
+                        @csrf
+                        <input type="hidden" name="movie_id" value="{{$movie_id}}">
+                        <input type="hidden" name="schedule_id" value="{{$schedule_id}}">
+                        <input type="hidden" name="screening_date" value="{{$screening_date}}">
+                        <input type="hidden" name="sheet_id" value="{{$sheet->id}}">
+                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
+
+                        <button type="submit">{{$sheet->row}}-{{$sheet->column}}</button>
+                    </form>
                 </td>
             @endif
 
