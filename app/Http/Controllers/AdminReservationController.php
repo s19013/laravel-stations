@@ -19,7 +19,8 @@ class AdminReservationController extends Controller
         // "reservationList" => Reservation::getAllReservation(CarbonImmutable::now())
         return view('admin.reservation.index', [
             // こういうwith使ったやつも関数かしてモデルファイルにおいて置くべきなのだろうか?
-            "reservationList" => Reservation::with('sheet')->with('user')->where("reservations.screening_date",">=",CarbonImmutable::now())->get()
+            "reservationList" => Reservation::with('sheet')->with('user')
+            ->where("reservations.screening_date",">=",date('Y-m-d-', strtotime(CarbonImmutable::now())))->get()
         ]);
     }
 
@@ -35,7 +36,7 @@ class AdminReservationController extends Controller
         if (empty($request->sheet_id)) {abort(400);}
         if (empty($request->movie_id)) {abort(400);}
         if (empty($request->schedule_id)) {abort(400);}
-        if (empty($request->user_id)) {abort(400);}
+        // if (empty($request->user_id)) {abort(400);}
 
         // すでに予約されてないか
         if (Reservation::isAllReadyExist($request->sheet_id,$request->schdule_id)) {
@@ -66,7 +67,7 @@ class AdminReservationController extends Controller
         if (empty($request->sheet_id)) {abort(400);}
         if (empty($request->movie_id)) {abort(400);}
         if (empty($request->schedule_id)) {abort(400);}
-        if (empty($request->user_id)) {abort(400);}
+        // if (empty($request->user_id)) {abort(400);}
 
         Reservation::updateReservation($reservation_id,$request);
 
