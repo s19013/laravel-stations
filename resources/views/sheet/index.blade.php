@@ -35,7 +35,7 @@
                         <input type="hidden" name="schedule_id" value="{{$schedule_id}}">
                         <input type="hidden" name="screening_date" value="{{$screening_date}}">
                         <input type="hidden" name="sheet_id" value="{{$sheet->id}}">
-                        {{-- <input type="hidden" name="user_id" value="{{Auth::id()}}"> --}}
+                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
 
                         <button type="submit">{{$sheet->row}}-{{$sheet->column}}</button>
                     </form>
