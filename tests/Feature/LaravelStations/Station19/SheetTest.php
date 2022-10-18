@@ -119,7 +119,7 @@ class SheetTest extends TestCase
         ->post('/reservations/store', [
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
-            'user_id'  => $user->id,
+            // 'user_id'  => $user->id,
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $response->assertStatus(302);
@@ -136,11 +136,11 @@ class SheetTest extends TestCase
         $response = $this->post('/reservations/store', [
             'schedule_id' => null,
             'sheet_id' => null,
-            'user_id' => null,
+            // 'user_id' => null,
             'screening_date' => null,
         ]);
         $response->assertStatus(302);
-        $response->assertInvalid(['schedule_id', 'sheet_id', 'user_id', 'screening_date']);
+        $response->assertInvalid(['schedule_id', 'sheet_id', 'screening_date']);
         $this->assertReservationCount(0);
     }
 
@@ -164,7 +164,7 @@ class SheetTest extends TestCase
         ->post('/reservations/store', [
             'schedule_id' => $scheduleId,
             'sheet_id' => Sheet::first()->id,
-            'user_id'  => $anotherUser->id,
+            // 'user_id'  => $anotherUser->id,
             'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $response->assertStatus(302);
