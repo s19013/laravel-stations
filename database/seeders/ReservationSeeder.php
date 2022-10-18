@@ -20,33 +20,29 @@ class ReservationSeeder extends Seeder
     public function run()
     {
         $count = 5;
-        for ($i = 0; $i < $count; $i++) {
-            $movieId = $this->createMovie('表示しないタイトル'.$i)->id;
-            Reservation::insert([
-                'screening_date' => new CarbonImmutable('2020-01-01'),
-                'schedule_id' => Schedule::insertGetId([
-                    'movie_id' => $movieId,
-                    'start_time' => new CarbonImmutable('2020-01-01 00:00:00'),
-                    'end_time' => new CarbonImmutable('2020-01-01 02:00:00'),
-                ]),
-                'sheet_id' => $i + 1,
-                'email' => 'sample@exmaple.com',
-                'name' => 'サンプル太郎',
-            ]);
-        }
+        // for ($i = 0; $i < $count; $i++) {
+        //     $movieId = $this->createMovie('表示しないタイトル'.$i)->id;
+        //     Reservation::insert([
+        //         'screening_date' => new CarbonImmutable('2020-01-01'),
+        //         'schedule_id' => Schedule::insertGetId([
+        //             'movie_id' => $movieId,
+        //             'start_time' => new CarbonImmutable('2020-01-01 00:00:00'),
+        //             'end_time' => new CarbonImmutable('2020-01-01 02:00:00'),
+        //         ]),
+        //         'sheet_id' => $i + 1,
+        //         'email' => 'sample@exmaple.com',
+        //         'name' => 'サンプル太郎',
+        //     ]);
+        // }
 
         for ($i = 0; $i < $count; $i++) {
             $movieId = $this->createMovie('タイトル'.$i)->id;
             Reservation::insert([
                 'screening_date' => new CarbonImmutable('2050-01-01'),
-                'schedule_id' => Schedule::insertGetId([
-                    'movie_id' => $movieId,
-                    'start_time' => new CarbonImmutable('2050-01-01 00:00:00'),
-                    'end_time' => new CarbonImmutable('2050-01-01 02:00:00'),
-                ]),
+                'schedule_id' => $this->createSchedule($movieId)->id,
                 'sheet_id' => $i + 1,
-                'email' => 'sample@exmaple.com',
-                'name' => 'サンプル太郎',
+                'email' => $i.'sample@exmaple.com',
+                'name' => 'サンプル太郎'.$i,
             ]);
         }
     }
@@ -67,8 +63,9 @@ class ReservationSeeder extends Seeder
     {
         $scheduleId = Schedule::insertGetId([
             'movie_id' => $movieId,
-            'start_time' => new CarbonImmutable(),
-            'end_time' => new CarbonImmutable(),
+            'screen_id' => 1,
+            'start_time' => new CarbonImmutable('2050-01-01 00:00:00'),
+            'end_time' => new CarbonImmutable('2050-01-01 00:00:00'),
         ]);
         return Schedule::find($scheduleId);
     }
