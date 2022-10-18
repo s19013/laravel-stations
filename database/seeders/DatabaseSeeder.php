@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SheetTableSeeder::class);
 
         // 手順書になかったやつ､テストの時にはコメントアウト
-        $this->call(ReservationSeeder::class);
+        // $this->call(ReservationSeeder::class);
     }
 }
