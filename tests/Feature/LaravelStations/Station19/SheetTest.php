@@ -47,7 +47,7 @@ class SheetTest extends TestCase
      */
     // 条件
     // ログインしている状態
-    public function test座席予約画面が表示されるか_ログイン中(): void
+    public function test座席予約画面が表示されるか(): void
     {
         $user = User::factory()->create();
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
@@ -59,10 +59,27 @@ class SheetTest extends TestCase
     /**
      * @group station19
      */
-    public function test座席予約画面がエラー時400を返すか(): void
+    // 期待
+    // 座席予約画面が表示されずにログインページに飛ぶか
+    // 条件
+    // ログインしていない状態
+    public function test座席予約画面が表示されずにログインページに飛ぶか(): void
     {
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
-        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets');
+        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets?screening_date='.CarbonImmutable::now()->format('Y-m-d'));
+        $response->assertStatus(302);
+        $response->assertSee('users/login');
+    }
+
+    /**
+     * @group station19
+     */
+    public function test座席予約画面がエラー時400を返すか(): void
+    {
+        $user = User::factory()->create();
+        [$movieId, $scheduleId] = $this->createMovieAndSchedule();
+        $response = $this->actingAs($user)
+        ->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets');
         $response->assertStatus(400);
     }
 
