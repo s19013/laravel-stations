@@ -17,28 +17,20 @@
     <form action="/admin/reservations/{{$reservation->id}}" method="post">
         @csrf
         @method("patch")
+        <p>movie_id</p>
+        <input type="number" name="movie_id"    value="{{old('movie_id',$movie_id)}}" required>
 
-        <input type="hidden" name="movie_id"    value="{{old('movie_id',$movie_id)}}">
-        <input type="hidden" name="schedule_id" value="{{old('schedule_id',$reservation->schedule_id)}}">
-        <input type="hidden" name="sheet_id"    value="{{old('sheet_id',$reservation->sheet_id)}}">
-        <input type="hidden" name="screening_date" value="{{old('screening_date',$reservation->screening_date)}}">
+        <p>schedule_id</p>
+        <input type="number" name="schedule_id" value="{{old('schedule_id',$reservation->schedule_id)}}" required>
 
+        <p>sheet_id</p>
+        <input type="number" name="sheet_id"    value="{{old('sheet_id',$reservation->sheet_id)}}" required>
 
-        <p>name</p>
-        @if ($errors->has('name'))
-            @foreach ($errors->get('name') as $error)
-                <p>{{$error}}</p>
-            @endforeach
-        @endif
-        <input name='name' type="text" value="{{old('name',$reservation->name)}}" required >
+        <p>screening_date</p>
+        <input type="text" placeholder="例 2000-01-01" name="screening_date" value="{{old('screening_date',$reservation->screening_date)}}" required>
 
-        <p>email</p>
-        @if ($errors->has('email'))
-            @foreach ($errors->get('email') as $error)
-                <p>{{$error}}</p>
-            @endforeach
-        @endif
-        <input name='email' type="email" value="{{old('email',$reservation->email)}}" required >
+        <p>user_id</p>
+        <input name='user_id' type="number" value="{{old('email',$reservation->user_id)}}" required >
 
 
 
