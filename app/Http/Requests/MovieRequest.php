@@ -33,7 +33,7 @@ class MovieRequest extends FormRequest
             'image_url'   => 'required|url',
             'description' => 'required',
             'is_showing'  => 'required',
-            'published_year' => 'required',
+            'published_year' => 'required|date|date_format:Y',
         ];
 
         if ($this->method() == 'POST') { $baseRule['title'] = ['required', 'max:220', 'unique:movies']; }
