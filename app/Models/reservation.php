@@ -34,7 +34,8 @@ class Reservation extends Model
                 "screening_date" => $request->screening_date,
                 "schedule_id"    => $request->schedule_id,
                 "sheet_id" => $request->sheet_id,
-                "user_id"  => $request->user_id,
+                // "user_id"  => $request->user_id,
+                "user_id"  => \Auth::id(),
             ]);
         });
     }
@@ -47,7 +48,8 @@ class Reservation extends Model
                 "screening_date" => $request->screening_date,
                 "schedule_id"    => $request->schedule_id,
                 "sheet_id" => $request->sheet_id,
-                "user_id"  => $request->user_id,
+                // "user_id"  => $request->user_id,
+                "user_id"  => \Auth::id(),
             ]);
         });
     }
