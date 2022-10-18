@@ -43,9 +43,11 @@ Route::prefix('/movies')->group(function (){
     Route::get('/', [MovieController::class, 'index']);
     Route::get('/{id}', [ScheduleController::class, 'index']);
 
-    Route::get('/{movie_id}/schedules/{schedule_id}/sheets', [ReservationController::class, 'index']);
-
-    Route::get('/{movie_id}/schedules/{schedule_id}/reservations/create',[ReservationController::class,'create']);
+    // ログインしてないならログインページに映る
+    Route::middleware('auth')->group(function (){
+        Route::get('/{movie_id}/schedules/{schedule_id}/sheets', [ReservationController::class, 'index']);
+        Route::get('/{movie_id}/schedules/{schedule_id}/reservations/create',[ReservationController::class,'create']);
+    });
 });
 
 Route::post('/reservations/store',[ReservationController::class,'store']);
