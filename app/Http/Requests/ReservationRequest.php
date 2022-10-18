@@ -30,6 +30,7 @@ class ReservationRequest extends FormRequest
             "schedule_id" =>'required',
             "screening_date" =>'required',
             "sheet_id" =>'required',
+            "user_id" =>'required',
         ];
 
 
