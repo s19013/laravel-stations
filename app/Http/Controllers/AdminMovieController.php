@@ -30,9 +30,6 @@ class AdminMovieController extends Controller
 
     public function store(MovieRequest $request)
     {
-        // チェックボックスにチェックがついてなかった時の処理
-        // if (empty($request->is_showing)) { $request['is_showing'] = 0; }
-
         // 登録
         Movie::storeMovie($request);
 
@@ -43,8 +40,6 @@ class AdminMovieController extends Controller
 
     public function update(MovieRequest $request)
     {
-        // if (empty($request->is_showing)) { $request['is_showing'] = 0; }
-
         Movie::updateMovie($request);
 
         return $this->redirectToIndex('更新しました');
