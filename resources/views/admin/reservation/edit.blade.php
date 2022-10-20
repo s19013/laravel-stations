@@ -10,9 +10,6 @@
     @if (session('message'))
         <p>{{ session('message') }}</p>
     @endif
-    <pre>
-        {{$reservation}}
-    </pre>
     <form action="/admin/reservations/{{$reservation->id}}" method="post">
         @csrf
         @method("patch")

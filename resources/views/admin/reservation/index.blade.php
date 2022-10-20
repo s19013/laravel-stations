@@ -14,9 +14,6 @@
     <a href="/admin/reservations/create">
         <button type="button">新規作成</button>
     </a>
-    <pre>
-        {{$reservationList}}
-    </pre>
     <table class="reservationTable">
         <tr>
             <td></td>
