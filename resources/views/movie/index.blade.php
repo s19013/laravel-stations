@@ -23,8 +23,8 @@
         @foreach ($movieList as $movie)
             <a href="/movies/{{$movie->id}}">
                 <div class="movie">
-                    <p>タイトル: {{ $movie->title }}</p>
                     <img src={{$movie->image_url}} alt="">
+                    <p>タイトル: {{ $movie->title }}</p>
                     @if ($movie->is_showing)
                     <p>上映中</p>
                     @endif
