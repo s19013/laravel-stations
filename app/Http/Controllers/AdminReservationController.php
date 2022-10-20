@@ -16,9 +16,8 @@ class AdminReservationController extends Controller
 {
     public function index()
     {
-        // "reservationList" => Reservation::getAllReservation(CarbonImmutable::now())
         return view('admin.reservation.index', [
-            // こういうwith使ったやつも関数かしてモデルファイルにおいて置くべきなのだろうか?
+            // こういうwith使ったやつも関数化してモデルファイルにおいて置くべきなのだろうか?
             "reservationList" => Reservation::with('sheet')->with('user')
             ->where("reservations.screening_date",">=",date('Y-m-d-', strtotime(CarbonImmutable::now())))->get()
         ]);
