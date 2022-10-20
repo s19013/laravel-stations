@@ -37,8 +37,6 @@ Route::get('/practice2', [PracticeController::class, 'sample2']);
 Route::get('/practice3', [PracticeController::class, 'sample3']);
 Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
-// Route::prefix()
-
 Route::prefix('/movies')->group(function (){
     Route::get('/', [MovieController::class, 'index']);
     Route::get('/{id}', [ScheduleController::class, 'index']);
@@ -68,18 +66,13 @@ Route::prefix('/admin/movies')->group(function (){
     Route::get('/{id}',[AdminScheduleController::class,'index']);
     Route::get('/{id}/schedules/create',[AdminScheduleController::class,'create']);
     Route::post('/{id}/schedules/store',[AdminScheduleController::class,'store']);
-
-    // 定義してないやつらの扱い
-    Route::fallback(function () {
-        return \App::abort(404);
-    });
 });
 
-Route::prefix('admin/schedules')->group(function (){
+Route::prefix('admin/schedules/{id}')->group(function (){
 
-    Route::get('/{id}/edit',[AdminScheduleController::class,'edit']);
-    Route::patch('/{id}/update',[AdminScheduleController::class,'update']);
-    Route::delete('/{id}/destroy',[AdminScheduleController::class,'destroy']);
+    Route::get('/edit',[AdminScheduleController::class,'edit']);
+    Route::patch('/update',[AdminScheduleController::class,'update']);
+    Route::delete('/destroy',[AdminScheduleController::class,'destroy']);
 });
 
 Route::prefix('admin/reservations')->group(function (){
