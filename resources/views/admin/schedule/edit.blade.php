@@ -11,7 +11,6 @@
         @csrf
         @method("PATCH")
 
-        {{-- <input type="hidden" name="schedule_id" value={{$movieSchedule->id}}> --}}
         <input type="hidden" name="movie_id" value={{$movieSchedule->movie_id}}>
 
         @if ($errors->has('start_time_date'))

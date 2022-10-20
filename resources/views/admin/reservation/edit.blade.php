@@ -7,7 +7,6 @@
     <title>Practice</title>
 </head>
 <body>
-    {{-- ぶっちゃけここは厳密にテストされないようなので適当に --}}
     @if (session('message'))
         <p>{{ session('message') }}</p>
     @endif
