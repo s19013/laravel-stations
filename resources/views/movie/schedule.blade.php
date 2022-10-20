@@ -11,9 +11,12 @@
     @if (session('message'))
         <p>{{ session('message') }}</p>
     @endif
+    <p>タイトル</p>
     <p>{{$movie->title}}</p>
     <img width="300rem" src="{{$movie->image_url}}" alt="">
+    <p>公開年</p>
     <p>{{$movie->published_year}}</p>
+    <p>説明</p>
     <p>{{$movie->description}}</p>
 
     <table>
