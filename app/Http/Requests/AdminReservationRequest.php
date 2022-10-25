@@ -28,7 +28,8 @@ class ReservationRequest extends FormRequest
             "schedule_id" =>'required',
             "screening_date" =>'required|date|date_format:Y-m-d',
             "sheet_id" =>'required',
-            "user_id" =>'required',
+            "user_id"  =>'required',
+            'movie_id' =>'required'
         ];
     }
 
