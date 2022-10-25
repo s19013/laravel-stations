@@ -33,6 +33,20 @@ class ReservationRequest extends FormRequest
         ];
     }
 
+    // 型をととのえる
+    public function validated()
+    {
+        // バリデーションチェックを通ったデータだけ取得
+	    $validated = $this->validator->validated();
+	    // キャストしたデータをarra_mergeで上書き
+        return array_merge($validated,[
+            "schedule_id" =>(integer)$this->schedule_id,
+            "sheet_id"    =>(integer)$this->sheet_id,
+            "user_id"     =>(integer)$this->user_id,
+            'movie_id'    =>(integer)$this->movie_id
+        ]);
+    }
+
     public function messages()
     {
         return [
