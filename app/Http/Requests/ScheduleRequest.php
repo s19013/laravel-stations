@@ -34,6 +34,18 @@ class ScheduleRequest extends FormRequest
         ];
     }
 
+    // 型をととのえる
+    public function validated()
+    {
+        // バリデーションチェックを通ったデータだけ取得
+	    $validated = $this->validator->validated();
+	    // キャストしたデータをarra_mergeで上書き
+        return array_merge($validated,[
+            "movie_id"  => (integer)$this->movie_id,
+            "screen_id" => (integer)$this->screen_id,
+        ]);
+    }
+
     public function messages()
     {
         return [
