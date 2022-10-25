@@ -63,6 +63,8 @@ class Movie extends Model
 
     public static function search($request)
     {
+        $request->is_showing = (boolean)$request->is_showing;
+
         $searchToolKit = new searchToolKit();
 
         // %と_をエスケープ
