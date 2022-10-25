@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\MovieRequest;
+use App\Http\Requests\PostMovieRequest;
+use App\Http\Requests\PatchMovieRequest;
 
 use Illuminate\Validation\Rule;
 use App\Models\Movie;
@@ -28,7 +29,7 @@ class AdminMovieController extends Controller
 
     public function create() { return view('admin.movie.create'); }
 
-    public function store(MovieRequest $request)
+    public function store(PostMovieRequest $request)
     {
         // 登録
         Movie::storeMovie($request);
@@ -38,7 +39,7 @@ class AdminMovieController extends Controller
 
     public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getSingleMovieData($id)]); }
 
-    public function update(MovieRequest $request)
+    public function update(PatchMovieRequest $request)
     {
         Movie::updateMovie($request);
 
