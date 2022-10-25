@@ -30,7 +30,8 @@ class MovieRequest extends FormRequest
         // そもそもなんでチェックボックスにこだわるんだよトグルとか､ラジオボタンで十分でしょ!!
         // 2バイトトラップの処理とかあるけど今回はそういうの無視
         return [
-            'title'       => 'required|max:220|unique:movies',
+            // 自分以外に同じタイトルがないか
+            'title'       => ['required', 'max:220', Rule::unique('movies')->ignore($this->id)],
             'image_url'   => 'required|url',
             'description' => 'required',
             'is_showing'  => 'required',
