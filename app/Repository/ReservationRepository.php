@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
-class Reservation
+use App\Models\Reservation;
+
+class ReservationRepository
 {
     public  function storeReservation($request)
     {
