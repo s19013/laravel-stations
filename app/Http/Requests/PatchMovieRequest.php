@@ -39,6 +39,18 @@ class MovieRequest extends FormRequest
         ];
     }
 
+    // 型をととのえる
+    public function validated()
+    {
+        // バリデーションチェックを通ったデータだけ取得
+	    $validated = $this->validator->validated();
+	    // キャストしたデータをarra_mergeで上書き
+        return array_merge($validated,[
+            "is_showing" =>(boolean)$this->is_showing,
+            "published_year"    =>(integer)$this->published_year,
+        ]);
+    }
+
     // public function withValidator(Validator $validator)
     // {
     //     // 新規
