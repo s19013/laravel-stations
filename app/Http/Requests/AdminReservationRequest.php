@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Validation\Validator;
 
-class ReservationRequest extends FormRequest
+class AdminReservationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,20 +31,6 @@ class ReservationRequest extends FormRequest
             "user_id"  =>'required',
             'movie_id' =>'required'
         ];
-    }
-
-    // 型をととのえる
-    public function validated()
-    {
-        // バリデーションチェックを通ったデータだけ取得
-	    $validated = $this->validator->validated();
-	    // キャストしたデータをarra_mergeで上書き
-        return array_merge($validated,[
-            "schedule_id" =>(integer)$this->schedule_id,
-            "sheet_id"    =>(integer)$this->sheet_id,
-            "user_id"     =>(integer)$this->user_id,
-            'movie_id'    =>(integer)$this->movie_id
-        ]);
     }
 
     public function messages()

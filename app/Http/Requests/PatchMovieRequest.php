@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Validation\Validator;
 
-class MovieRequest extends FormRequest
+class PatchMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,31 +38,6 @@ class MovieRequest extends FormRequest
             'published_year' => 'required|numeric',
         ];
     }
-
-    // 型をととのえる
-    public function validated()
-    {
-        // バリデーションチェックを通ったデータだけ取得
-	    $validated = $this->validator->validated();
-	    // キャストしたデータをarra_mergeで上書き
-        return array_merge($validated,[
-            "is_showing" =>(boolean)$this->is_showing,
-            "published_year"    =>(integer)$this->published_year,
-        ]);
-    }
-
-    // public function withValidator(Validator $validator)
-    // {
-    //     // 新規
-    //     $validator->sometimes('title',['required', 'max:220', 'unique:movies'] , function ($input) {
-    //         return $this->method() == 'POST';
-    //     });
-
-    //     // 更新
-    //     $validator->sometimes('title',['required', 'max:220', Rule::unique('movies')->ignore($this->id)] , function ($input) {
-    //         return $this->method() == 'PATCH';
-    //     });
-    // }
 
     public function messages()
     {
