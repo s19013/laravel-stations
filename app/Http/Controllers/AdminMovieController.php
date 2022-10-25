@@ -6,23 +6,30 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostMovieRequest;
 use App\Http\Requests\PatchMovieRequest;
 
+use App\Repository\MovieRepository;
+
 use Illuminate\Validation\Rule;
 use App\Models\Movie;
 
 class AdminMovieController extends Controller
 {
+    public $movieRepository;
+
+    public function __construct(MovieRepository $movieRepository)
+    {
+        $this->movieRepository = $movieRepository;
+    }
+
     public function index()
     {
         // 外部結合してないからこの書き方でも n+1は起きないはず
-        $movieList =Movie::all();
-        return view('admin.movie.index', ['movieList' => $movieList]);
+        return view('admin.movie.index', ['movieList' => Movie::all()]);
     }
 
     public function redirectToIndex($message = null)
     {
-        $movieList = Movie::all();
         return redirect('/admin/movies/')->with([
-            'movieList' => $movieList,
+            'movieList' => Movie::all(),
             'message'   => $message,
         ]);
     }
@@ -32,23 +39,23 @@ class AdminMovieController extends Controller
     public function store(PostMovieRequest $request)
     {
         // 登録
-        Movie::storeMovie($request);
+        $this->movieRepository->store($request);
 
         return $this->redirectToIndex('映画を追加しました');
     }
 
-    public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::getSingleMovieData($id)]); }
+    public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::select('*')->where('id','=',$id)->first()]); }
 
     public function update(PatchMovieRequest $request)
     {
-        Movie::updateMovie($request);
+        $this->movieRepository->update($request);
 
         return $this->redirectToIndex('更新しました');
     }
 
     public function destroy($id)
     {
-        if (Movie::isExists($id)) {
+        if ($this->movieRepository->isExists($id)) {
             Movie::deleteMovie($id);
             return $this->redirectToIndex("{$id}番を削除しました");
         }
