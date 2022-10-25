@@ -2,8 +2,6 @@
 
 namespace App\Repository;
 
-use Illuminate\Database\Eloquent\Model;
-
 use App\Models\Movie;
 use App\tool\searchToolKit;
 use DB;
