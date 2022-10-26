@@ -64,6 +64,7 @@ class ScheduleTest extends TestCase
         $movie = $this->createMovie();
         Schedule::insert([
             'movie_id' => $movie->id,
+            'screen_id' => 1,
             'start_time' => CarbonImmutable::now(),
             'end_time' => CarbonImmutable::now()->addHour(),
         ]);
