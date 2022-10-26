@@ -36,7 +36,7 @@ class MovieRepository
         });
     }
 
-    public  function deleteMovie($id)
+    public  function delete($id)
     {
         DB::transaction(function () use($id){
             Movie::where('id', '=',$id)->delete();

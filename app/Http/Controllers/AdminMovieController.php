@@ -56,7 +56,7 @@ class AdminMovieController extends Controller
     public function destroy($id)
     {
         if ($this->movieRepository->isExists($id)) {
-            $this->movieRepository->deleteMovie($id);
+            $this->movieRepository->delete($id);
             return $this->redirectToIndex("{$id}番を削除しました");
         }
         return \App::abort(404);
