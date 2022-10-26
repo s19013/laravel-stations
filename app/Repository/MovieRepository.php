@@ -36,7 +36,7 @@ class MovieRepository
         });
     }
 
-    public static function deleteMovie($id)
+    public  function deleteMovie($id)
     {
         DB::transaction(function () use($id){
             Movie::where('id', '=',$id)->delete();
@@ -77,7 +77,7 @@ class MovieRepository
         return $query->get();
     }
 
-    public static function isExists($id)
+    public  function isExists($id)
     {
         return Movie::where('id','=',$id)->exists();
     }
