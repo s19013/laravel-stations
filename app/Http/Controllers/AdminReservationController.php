@@ -50,7 +50,7 @@ class AdminReservationController extends Controller
             ]);
         }
 
-        $this->reservationRepository->storeReservation($request);
+        $this->reservationRepository->store($request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "予約した",
@@ -74,7 +74,7 @@ class AdminReservationController extends Controller
         if (empty($request->schedule_id)) {abort(400);}
         if (empty($request->user_id)) {abort(400);}
 
-        $this->reservationRepository->updateReservation($reservation_id,$request);
+        $this->reservationRepository->update($reservation_id,$request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "更新した",
@@ -86,7 +86,7 @@ class AdminReservationController extends Controller
         // 存在していなかったら400
         if ($this->reservationRepository->isDeleted($reservation_id)) {abort(404);}
 
-        $this->reservationRepository->deleteReservation($reservation_id);
+        $this->reservationRepository->delete($reservation_id);
 
         return redirect("/admin/reservations")->with([
             'message'   => "削除した",

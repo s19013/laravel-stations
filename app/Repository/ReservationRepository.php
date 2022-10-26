@@ -6,7 +6,7 @@ use App\Models\Reservation;
 
 class ReservationRepository
 {
-    public  function storeReservation($request)
+    public  function store($request)
     {
         \DB::transaction(function () use($request){
             Reservation::create([
@@ -18,7 +18,7 @@ class ReservationRepository
         });
     }
 
-    public  function updateReservation($reservation_id,$request)
+    public  function update($reservation_id,$request)
     {
         \DB::transaction(function () use($reservation_id,$request){
             Reservation::where('id','=',$reservation_id)
@@ -31,7 +31,7 @@ class ReservationRepository
         });
     }
 
-    public  function deleteReservation($reservation_id)
+    public  function delete($reservation_id)
     {
         \DB::transaction(function () use($reservation_id){
             Reservation::where('id','=',$reservation_id)
