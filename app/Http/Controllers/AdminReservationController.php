@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminReservationRequest;
 use App\Models\Reservation;
-use App\Models\Movie;
-use App\Models\Sheet;
-use Carbon\CarbonImmutable;
-
 use App\Models\User;
 
+use App\Repository\ReservationRepository;
+
+use Carbon\CarbonImmutable;
 
 class AdminReservationController extends Controller
 {
+    public $reservationRepository;
+
+    public function __construct(ReservationRepository $reservationRepository)
+    {
+        $this->reservationRepository = $reservationRepository;
+    }
+
     public function index()
     {
         return view('admin.reservation.index', [
@@ -38,13 +44,13 @@ class AdminReservationController extends Controller
         if (empty($request->user_id)) {abort(400);}
 
         // すでに予約されてないか
-        if (Reservation::isAllReadyExist($request->sheet_id,$request->schdule_id)) {
+        if ($this->reservationRepository->isAllReadyExist($request->sheet_id,$request->schdule_id)) {
             return redirect("/admin/reservations")->with([
                 "message"        => "そこはすでに予約されています",
             ]);
         }
 
-        Reservation::storeReservation($request);
+        $this->reservationRepository->store($request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "予約した",
@@ -55,7 +61,7 @@ class AdminReservationController extends Controller
     {
         return view('admin.reservation.edit',[
             "reservation" => Reservation::find($reservation_id),
-            "movie_id"    => Reservation::getIdOfMovieReservated($reservation_id)
+            "movie_id"    => $this->reservationRepository->getIdOfMovieReservated($reservation_id)
         ]);
     }
 
@@ -68,7 +74,7 @@ class AdminReservationController extends Controller
         if (empty($request->schedule_id)) {abort(400);}
         if (empty($request->user_id)) {abort(400);}
 
-        Reservation::updateReservation($reservation_id,$request);
+        $this->reservationRepository->update($reservation_id,$request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "更新した",
@@ -78,9 +84,9 @@ class AdminReservationController extends Controller
     public function destroy($reservation_id)
     {
         // 存在していなかったら400
-        if (Reservation::isDeleted($reservation_id)) {abort(404);}
+        if ($this->reservationRepository->isDeleted($reservation_id)) {abort(404);}
 
-        Reservation::deleteReservation($reservation_id);
+        $this->reservationRepository->delete($reservation_id);
 
         return redirect("/admin/reservations")->with([
             'message'   => "削除した",

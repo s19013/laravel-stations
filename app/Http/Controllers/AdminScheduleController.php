@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ScheduleRequest;
 
+use App\Repository\ScheduleRepository;
+
 use App\Models\Movie;
 use App\Models\Schedule;
 
 class AdminScheduleController extends Controller
 {
+    public $scheduleRepository;
+
+    public function __construct(ScheduleRepository $scheduleRepository)
+    {
+        $this->scheduleRepository = $scheduleRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +44,7 @@ class AdminScheduleController extends Controller
     public function store(ScheduleRequest $request)
     {
         // 登録
-        Schedule::storeSchedule($request);
+        $this->scheduleRepository->store($request);
 
         return $this->redirectToIndex($request->movie_id,"{$request->id}にスケジュールを追加しました");
     }
@@ -48,15 +57,15 @@ class AdminScheduleController extends Controller
 
     public function update($id,ScheduleRequest $request)
     {
-        Schedule::updateSchedule($id,$request);
+        $this->scheduleRepository->update($id,$request);
 
         return $this->redirectToIndex($request->movie_id,"{$id}のスケジュールを変更しました");
     }
 
     public function destroy($id,Request $request)
     {
-        if (Schedule::isExists($id)) {
-            Schedule::deleteSchedule($id);
+        if ($this->scheduleRepository->isExists($id)) {
+            $this->scheduleRepository->delete($id);
             return $this->redirectToIndex($request->movie_id,"{$id}のスケジュールを削除しました");
         }
         return \App::abort(404);
