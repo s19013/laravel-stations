@@ -8,8 +8,17 @@ use App\Models\Reservation;
 use App\Models\Movie;
 use App\Models\Sheet;
 
+use App\Repository\ReservationRepository;
+
 class ReservationController extends Controller
 {
+    public $reservationRepository;
+
+    public function __construct(ReservationRepository $reservationRepository)
+    {
+        $this->reservationRepository = $reservationRepository;
+    }
+
     public function index($movie_id,$schedule_id,Request $request)
     {
         // クエリがないなら400
@@ -20,7 +29,7 @@ class ReservationController extends Controller
            "schedule_id"    => $schedule_id,
            "screening_date" => $request->screening_date,
            "sheets"   => Sheet::all(),
-           "reserved" => Reservation::isAllreadyReserved($schedule_id)
+           "reserved" => $this->reservationRepository->isAllreadyReserved($schedule_id)
        ]);
     }
 
@@ -30,7 +39,7 @@ class ReservationController extends Controller
         if (empty($request->screening_date) || empty($request->sheetId)) {abort(400);}
 
         // すでに予約されてないか
-        if (Reservation::isAllReadyExist($request->sheetId,$schedule_id)) {abort(400);}
+        if ($this->reservationRepository->isAllReadyExist($request->sheetId,$schedule_id)) {abort(400);}
 
 
 
@@ -51,7 +60,7 @@ class ReservationController extends Controller
         if (empty($request->user_id)) {abort(400);}
 
         // すでに予約されてないか
-        if (Reservation::isAllReadyExist($request->sheet_id,$request->schedule_id)) {
+        if ($this->reservationRepository->isAllReadyExist($request->sheet_id,$request->schedule_id)) {
             return redirect("/movies/{$request->movie_id}/schedules/{$request->schedule_id}/sheets?screening_date={$request->screening_date}")->with([
                 "message"        => "そこはすでに予約されています",
                 "movie_id"       => $request->movie_id,
@@ -61,7 +70,7 @@ class ReservationController extends Controller
             ]);
         }
 
-        Reservation::storeReservation($request);
+        $this->reservationRepository->store($request);
 
         return redirect("movies/{$request->movie_id}")->with([
             'message'   => "予約した",
