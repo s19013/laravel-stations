@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminReservationRequest;
+
 use App\Models\Reservation;
 use App\Models\User;
 
@@ -29,7 +30,7 @@ class AdminReservationController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('admin.reservation.create');
     }
@@ -50,14 +51,14 @@ class AdminReservationController extends Controller
             ]);
         }
 
-        $this->reservationRepository->store($request);
+        $this->reservationRepository->adminStore($request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "予約した",
         ]);
     }
 
-    public function edit($reservation_id)
+    public function edit(String $reservation_id)
     {
         return view('admin.reservation.edit',[
             "reservation" => Reservation::find($reservation_id),
@@ -65,7 +66,7 @@ class AdminReservationController extends Controller
         ]);
     }
 
-    public function update($reservation_id,AdminReservationRequest $request)
+    public function update(AdminReservationRequest $request)
     {
         // クエリがないなら400
         if (empty($request->screening_date)) {abort(400);}
@@ -74,14 +75,14 @@ class AdminReservationController extends Controller
         if (empty($request->schedule_id)) {abort(400);}
         if (empty($request->user_id)) {abort(400);}
 
-        $this->reservationRepository->update($reservation_id,$request);
+        $this->reservationRepository->update($request);
 
         return redirect("/admin/reservations")->with([
             'message'   => "更新した",
         ]);
     }
 
-    public function destroy($reservation_id)
+    public function destroy(String $reservation_id)
     {
         // 存在していなかったら400
         if ($this->reservationRepository->isDeleted($reservation_id)) {abort(404);}
