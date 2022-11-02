@@ -5,6 +5,7 @@ namespace App\Repository;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostMovieRequest;
 use App\Http\Requests\PatchMovieRequest;
+use App\Http\Requests\getMovieRequest;
 
 use App\Models\Movie;
 use App\tool\searchToolKit;
@@ -47,8 +48,9 @@ class MovieRepository
         });
     }
 
-    public function search(Request $request)
+    public function search(getMovieRequest $request)
     {
+        $request->shapeing();
         $searchToolKit = new searchToolKit();
 
         // %と_をエスケープ
@@ -73,9 +75,9 @@ class MovieRepository
 
         // 検索対象
         // リクエストに送られるのはすべて""文字列""
-        if ($request->is_showing === "1") { $query->where('is_showing','=',1); }
+        if ($request->is_showing === true) { $query->where('is_showing','=',1); }
         //  == だとnullも0扱いになるので ===
-        if ($request->is_showing === "0") { $query->where('is_showing','=',0); }
+        if ($request->is_showing === false) { $query->where('is_showing','=',0); }
 
         // 取得
         return $query->get();

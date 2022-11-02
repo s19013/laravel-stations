@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\getMovieRequest;
 
 use App\Repository\MovieRepository;
 
@@ -17,7 +18,7 @@ class MovieController extends Controller
         $this->movieRepository = $movieRepository;
     }
 
-    public function index(Request $request)
+    public function index(getMovieRequest $request)
     {
         return view('movie.index', ['movieList' => $this->movieRepository->search($request)]);
     }
