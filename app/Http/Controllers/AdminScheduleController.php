@@ -24,14 +24,14 @@ class AdminScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(string $id)
     {
         return view('admin.schedule.index', [
             'movie' => Movie::with('schedules')->find($id)
         ]);
     }
 
-    public function redirectToIndex($movie_id,$message = null)
+    public function redirectToIndex(int $movie_id,string $message = null)
     {
         return redirect("/admin/movies/${movie_id}")->with([
             'movie' => Movie::with('schedules')->find($movie_id),
@@ -39,7 +39,7 @@ class AdminScheduleController extends Controller
         ]);
     }
 
-    public function create($id) { return view('admin.schedule.create')->with(['movieId' => $id]); }
+    public function create(string $id) { return view('admin.schedule.create')->with(['movieId' => $id]); }
 
     public function store(ScheduleRequest $request)
     {
@@ -49,24 +49,25 @@ class AdminScheduleController extends Controller
         return $this->redirectToIndex($request->movie_id,"{$request->id}にスケジュールを追加しました");
     }
 
-    public function edit($id) {
+    public function edit(string $id) {
         return view('admin.schedule.edit')->with([
             'movieSchedule' => Schedule::find($id),
         ]);
     }
 
-    public function update($id,ScheduleRequest $request)
+    public function update(ScheduleRequest $request)
     {
-        $this->scheduleRepository->update($id,$request);
+        $this->scheduleRepository->update($request);
 
-        return $this->redirectToIndex($request->movie_id,"{$id}のスケジュールを変更しました");
+        return $this->redirectToIndex($request->movie_id,"{$request->id}のスケジュールを変更しました");
     }
 
-    public function destroy($id,Request $request)
+    public function destroy(String $id)
     {
         if ($this->scheduleRepository->isExists($id)) {
             $this->scheduleRepository->delete($id);
-            return $this->redirectToIndex($request->movie_id,"{$id}のスケジュールを削除しました");
+
+            return redirect("/admin/movies/");
         }
         return \App::abort(404);
     }
