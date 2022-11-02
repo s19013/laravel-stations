@@ -1,6 +1,10 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Repository;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\PostMovieRequest;
+use App\Http\Requests\PatchMovieRequest;
 
 use App\Models\Movie;
 use App\tool\searchToolKit;
@@ -9,7 +13,7 @@ use DB;
 class MovieRepository
 {
     // 登録
-    public function store($request)
+    public function store(PostMovieRequest $request)
     {
         DB::transaction(function () use($request){
             Movie::create([
@@ -22,7 +26,7 @@ class MovieRepository
         });
     }
 
-    public function update($request)
+    public function update(PatchMovieRequest $request)
     {
         DB::transaction(function () use($request){
             Movie::where('id','=',$request->id)
@@ -36,14 +40,14 @@ class MovieRepository
         });
     }
 
-    public  function delete($id)
+    public  function delete(String $id)
     {
         DB::transaction(function () use($id){
             Movie::where('id', '=',$id)->delete();
         });
     }
 
-    public function search($request)
+    public function search(Request $request)
     {
         $searchToolKit = new searchToolKit();
 
@@ -77,7 +81,7 @@ class MovieRepository
         return $query->get();
     }
 
-    public  function isExists($id)
+    public  function isExists(String $id)
     {
         return Movie::where('id','=',$id)->exists();
     }

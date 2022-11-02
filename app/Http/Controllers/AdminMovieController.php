@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class AdminMovieController extends Controller
         return view('admin.movie.index', ['movieList' => Movie::all()]);
     }
 
-    public function redirectToIndex($message = null)
+    public function redirectToIndex(String $message = null)
     {
         return redirect('/admin/movies/')->with([
             'movieList' => Movie::all(),
@@ -44,7 +44,9 @@ class AdminMovieController extends Controller
         return $this->redirectToIndex('映画を追加しました');
     }
 
-    public function edit($id) { return view('admin.movie.edit')->with(['movie' => Movie::select('*')->where('id','=',$id)->first()]); }
+    public function edit(String $id) {
+        return view('admin.movie.edit')->with(['movie' => Movie::select('*')->where('id','=',$id)->first()]);
+    }
 
     public function update(PatchMovieRequest $request)
     {
@@ -53,7 +55,7 @@ class AdminMovieController extends Controller
         return $this->redirectToIndex('更新しました');
     }
 
-    public function destroy($id)
+    public function destroy(String $id)
     {
         if ($this->movieRepository->isExists($id)) {
             $this->movieRepository->delete($id);
